@@ -1,0 +1,13 @@
+x .customerList :global .ant-form {
+  display: flex;
+}
+x .customerList :global .ant-form .ant-form-item {
+  margin-right: 20px;
+}
+x .customerList :global .ant-form .submit,
+x .customerList :global .ant-form .enable {
+  margin-top: 30px;
+}
+.table {
+  height: 500px;
+}

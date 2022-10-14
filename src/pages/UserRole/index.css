@@ -1,0 +1,15 @@
+.modal_title {
+  height: 40px;
+  color: #FFFFFF;
+  font-size: 20px;
+  line-height: 40px;
+  background-color: #001529;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.modal_title :global .close {
+  position: absolute;
+  right: 10px;
+}

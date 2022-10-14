@@ -1,0 +1,122 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../utils/utils.less';
+
+
+.tableList {
+  .tableListOperator {
+    margin-bottom: 16px;
+    button {
+      margin-right: 8px;
+    }
+  }
+}
+.form_wrap1{
+  :global{
+    .ant-select-selection{
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+.form_wrap2{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    :global{
+      .ant-select-selection{
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+}
+.tableListForm {
+  :global {
+    .ant-form-item {
+      margin-bottom: 24px !important;
+      margin-right: 0;
+      display: flex !important;
+      > .ant-form-item-label {
+        width: auto;
+        line-height: 32px;
+        padding-right: 8px;
+      }
+      .ant-form-item-control {
+        line-height: 32px;
+      }
+    }
+    .ant-form-item-control-wrapper {
+      flex: 1;
+    }
+    .ant-calendar-picker{
+      width: 100%;
+    }
+  }
+  .submitButtons {
+    display: block;
+    white-space: nowrap;
+    margin-bottom: 24px;
+  }
+}
+
+.stat{
+  .stat_item{
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    .num{
+      color: #f5222d;
+      font-weight: 600;
+      display: inline-block;
+      margin: 0 5px;
+    }
+  }
+}
+.rankExportBox {
+  min-height: 500px;
+  .exportBtn {
+    width: 100px;
+    margin-top: 30px;
+  }
+}
+
+.moneyTypeBox {
+  display: inline-block;
+  margin-left: 25px;
+}
+
+@media screen and (max-width: @screen-lg) {
+  .tableListForm :global(.ant-form-item) {
+    margin-right: 24px;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .tableListForm :global(.ant-form-item) {
+    margin-right: 8px;
+  }
+}
+.home{
+
+  :global{
+     .profit_title{
+       font-size: 20px;
+       font-weight: 700; 
+     }
+     .profit_info{
+      font-weight: 700;
+      font-size: 22px;
+      margin: 10px 100px;
+      display: flex;
+      justify-content: space-between;
+     }
+     ._info{
+       margin: 10px 70px;
+     }
+     .card_profit{
+      background-color: rgb(235, 237, 238);
+      border-radius: 8px;
+      margin-bottom: 20px;
+     }
+     
+  }
+}

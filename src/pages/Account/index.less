@@ -1,0 +1,61 @@
+
+@import '~antd/lib/style/themes/default.less';
+@import '../../utils/utils.less';
+
+.account{
+  :global{
+    .ant-form{ 
+      display: flex;
+      .ant-form-item{
+        margin-right: 20px;
+      }
+      .submit,
+      .enable{
+        margin-top: 30px;
+        // text-align: center;
+      }
+    }
+  
+  }
+}
+.modal_title{
+  height: 40px;
+  color: #FFFFFF;
+  font-size: 20px;
+  // font-weight: 700;
+  line-height: 40px;
+  background-color: #001529;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+  :global{
+    .close{
+    position: absolute;
+    right: 10px;
+    }
+    
+  }
+ }
+
+ .addForm{
+  :global{
+    .ant-form-item-label {
+      margin-top: 5px;
+      display: flex;
+      justify-content: flex-end;
+      line-height: 18px;  //这个数值视具体情况而定
+      label {            //这是关键
+        white-space: normal;
+        text-align: right;
+        color: #8a8a8a;
+        padding-right: 22px;
+        font-size: 14px;
+        &:after {          
+          content: none !important;      //解决上面的样式label后面会有空格
+        }
+      }
+    }
+    
+   }
+ }

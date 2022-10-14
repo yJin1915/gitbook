@@ -1,0 +1,112 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../utils/utils.less';
+
+.tableList {
+  .tableListOperator {
+    margin-bottom: 16px;
+    button {
+      margin-right: 8px;
+    }
+    // text-align: center;
+  }
+}
+
+.tableListForm {
+  :global {
+    .ant-form-item {
+      margin-bottom: 24px !important;
+      margin-right: 0;
+      display: flex !important;
+      > .ant-form-item-label {
+        width: auto;
+        line-height: 32px;
+        padding-right: 8px;
+      }
+      .ant-form-item-control {
+        line-height: 32px;
+      }
+    }
+    .ant-form-item-control-wrapper {
+      flex: 1;
+    }
+  }
+  .submitButtons {
+    display: block;
+    white-space: nowrap;
+    margin-bottom: 24px;
+  }
+}
+.cityIpInfo {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+.cityIpTabItem {
+  margin-top: 10px;
+  :global{
+    .ant-input-group > .ant-input:first-child, .ant-input-group-addon:first-child {
+      border-radius: 0 !important;
+    }
+    .ant-input:focus, .ant-input:hover, .ant-select-selection:hover, .ant-select-selection:focus {
+      border-color: #d9d9d9;
+      box-shadow: 0 0 0 2px transparent !important;
+    }
+    .ant-form-item {
+      line-height: 40px !important;
+    }
+  }
+}
+
+.formWrap{
+  :global{
+    .ant-select-selection{
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+.deviceIdBox {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+@media screen and (max-width: @screen-lg) {
+  .tableListForm :global(.ant-form-item) {
+    margin-right: 24px;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .tableListForm :global(.ant-form-item) {
+    margin-right: 8px;
+  }
+}
+
+.userInfo{
+  width: 500px;
+  // background-color: pink;
+  margin-left: 250px;
+  border: 1px solid #d9d9d9;
+  margin-bottom: 20px;
+  :global{
+  .ant-descriptions-title{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  .ant-descriptions-item-label{
+    width: 150px;
+    margin-left: 50px;
+    font-size: 16px;
+  }
+  }
+}
+.userInfoForm{
+  margin-top: 10px;
+  margin-left: 50px;
+
+  :global{
+   
+  }
+}

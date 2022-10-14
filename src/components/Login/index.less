@@ -1,0 +1,81 @@
+@import '~antd/lib/style/themes/default.less';
+
+.login {
+  :global {
+    .ant-tabs .ant-tabs-bar {
+      border-bottom: 0;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .ant-form-item {
+      margin: 0 2px 24px;
+    }
+  }
+
+  .getCaptcha {
+    display: block;
+    width: 100%;
+  }
+
+  .icon {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.2);
+    margin-left: 16px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: @primary-color;
+    }
+  }
+  .vcodeWrap{
+    position: relative;
+    height: 40px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    .vcode{
+      width: 100%;
+      height: 100%;
+      line-height: normal;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .mask{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      background-color: rgba(0,0,0,0.95) ;
+      opacity: 0.8;
+      line-height: 40px;
+      color: white;
+      z-index: 1;
+    }
+  }
+
+  .other {
+    text-align: left;
+    margin-top: 24px;
+    line-height: 22px;
+
+    .register {
+      float: right;
+    }
+  }
+
+  .prefixIcon {
+    font-size: @font-size-base;
+    color: @disabled-color;
+  }
+
+  .submit {
+    width: 100%;
+    margin-top: 24px;
+  }
+}
