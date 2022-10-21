@@ -1,6 +1,6 @@
 import React,{useEffect, useState}from 'react'
 import styles from './index.less'
-import { Form,Card, Input, Button,Select,Icon ,notification,Radio,Col, message, Row} from 'antd';
+import { Form,Card, Input, Button,Select,Icon ,notification,Radio,Col, message, Modal} from 'antd';
 import { formatMessage } from 'umi/locale';
 import { UserList, UserenbOrDis, OperationalRole } from '@/api/account';
 import TableList from './TableList';
@@ -9,9 +9,11 @@ import { userDataList } from '@/api/customer';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { profitInfo, User } from '@/api/User';
 // import { TeamOutlined } from '@ant-design/icons';
+
 export default function Account () {
     // 根据当前账号角色/权限，只能显示自己所属下级角色
    // 弹框
+   
    const [visible, setVisible] = useState(false)
    const [usersInfo, setUsersInfo] = useState({
      pageNum: 1,
@@ -104,7 +106,6 @@ export default function Account () {
   // 获取本地当前用户角色权限。
   const currentRole = () => {
     let state = storage.get('CurrentRole') ? storage.get('CurrentRole') : null
-    
     if(state){
       setCurrRole(RoleListType(storage.get('CurrentRole')));
     }
@@ -186,7 +187,7 @@ export default function Account () {
     <div className={styles.customerList}>
             {/* form  */}
         <Form layout='inline'   >
-          <Form.Item label={formatMessage({id:'Account'})}  >
+          <Form.Item label={formatMessage({id:'WalletAddress'})}  >
              <Input placeholder={formatMessage({ id: 'user' })}
               allowClear value={usersInfo.account} onChange={InputChange}/>
             </Form.Item>
@@ -208,7 +209,7 @@ export default function Account () {
                </Form.Item>
           </Form>          
           {/* 表格 */}
-            <TableList  data={usersInfo} page={page} custList={custList}/>
+            <TableList  data={usersInfo} page={page} custList={custList} />
            
         </div>
         </Card>

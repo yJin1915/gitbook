@@ -4,13 +4,16 @@ import { routerRedux } from 'dva/router';
 import { formatMessage, FormattedMessage,setLocale ,getLocale } from 'umi/locale';
 import {  Alert, Modal ,Button} from 'antd';
 import Login from '@/components/Login';
+import UserLogin from '@/components/UserLogin';
 import styles from './Login.less';
 import { goPage } from '@/utils/aublicMethod';
 import { storage } from '@/utils/utils';
-import {LoginApi} from '@/api/Login'
+import {LoginApi,UserLoginApi} from '@/api/Login'
 import router from 'umi/router';
 import {  OperationalRole } from '@/api/account';
 import { SetuserInfo, User } from '@/api/User';
+const Web3EthPersonal = require('web3-eth-personal');
+const Web3Utils = require("web3-utils");
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
@@ -20,7 +23,6 @@ const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
   submitting: loading.effects['login/login'],
 }))
 class LoginPage extends Component {
-
   state = {
     autoLogin: true,
     _token: '',
@@ -114,9 +116,71 @@ class LoginPage extends Component {
     })
     router.push(path)
   }
+  handleSubmit1 = () => {
+    if(!window.ethereum){
+      window.open("https://metamask.io/download.html","_blank")
+      return;
+    }
+    window.ethereum
+    .request({ method: "eth_requestAccounts" })
+    .then((accounts) => {
+
+      let chainId = web3.currentProvider.chainId
+      if(chainId!="0x1"){//如果不是以太坊主网
+        message.error(formatMessage({id:'Mainnet'}));
+        return;
+      }
+      if (window.ethereum) {
+        let web3 = new Web3EthPersonal(window.ethereum);
+        let FreeCity = "123456";
+        let invite = "";
+        web3.sign(Web3Utils.fromUtf8(FreeCity), accounts[0], (err, res) => {
+          if(err){
+            console.log("失败：", err);
+            return;
+          }
+           let params = {
+            walletAddress: accounts[0],
+            signature: res,
+            params: FreeCity,
+          };
+           UserLoginApi(params).then((res) => {
+            if (res?.success) {
+              storage.set('FcToken', res.data.token)
+              User().then(res=> {
+                if (res?.success) {
+                  storage.set('cutuserInfo', { ...res.data.user, ...res.data.role })
+                  // if(res.data.user.formStatus-0 !==1 && res.data.user)
+                  // 获取用户信息是已填写表单
+                 return SetuserInfo(res.data.user.userId)
+                  }
+              }).then(res => {
+                if (res?.success) {
+                  router.push('/customer/management/index')
+                  } 
+                })
+              
+            }
+          }).catch(err=>{
+            console.log(err)
+          })
+         
+        })
+        .catch((err) => {
+          console.log("失败：", err);
+        });
+      }
+      
+    })//如果用户拒绝了登录请求
+    .catch((reason) => {
+      console.log(reason)
+    });
+  };
+
   render() {
-    const { login, submitting } = this.props;
+    const { login, submitting,location } = this.props;
     const { type, autoLogin,visible } = this.state;
+   if(location.pathname=='/adlogin'){
     return (
       <div className={styles.login_land}>
         <div className='user_login'>
@@ -198,6 +262,14 @@ class LoginPage extends Component {
         </div>
        </div>
     );
+    }else{
+      return (
+        <div className={styles.login_land1} onClick={this.handleSubmit1}>
+          <UserLogin className={styles.main1}>
+          </UserLogin>
+        </div>
+      );
+    }
   }
 }
 

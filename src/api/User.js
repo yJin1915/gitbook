@@ -15,7 +15,7 @@ import { paramsPath } from '@/utils/utils'
 
 /**
  * c查询用户信息
- * @param {*} params  { emailLike:账号，roleId：角色，status,pageNum,pageSize}
+ * @param {*} params  { walletAddress:账号，roleId：角色，status,pageNum,pageSize}
  * @returns 
  */
  export const UserInfo = (params) => {
@@ -62,13 +62,19 @@ import { paramsPath } from '@/utils/utils'
   * @param {*} inviteCode {邀请码}
   * @param {*} data {}
   */
- export const userProfitInfo = (data) => {
-  return   request(`/partner/form/saveOrUpdate`,{
+ export const userProfitInfo = (inviteCode,data) => {
+  return   request(`/partner/form/saveOrUpdate/`+inviteCode,{
     method: 'post',
     body:JSON.stringify({...data})
   })
  }
 
+ //是否填写表单
+ export const checkFormExists = (data) => {
+  return   request(`/partner/form/checkFormExists?uid=${data}`,{
+    method: 'get',
+  })
+ }
 
  /**
   * 获取当前用户填写的信息

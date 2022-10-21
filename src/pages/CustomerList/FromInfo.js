@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { formatMessage ,FormattedMessage} from 'umi/locale';
 
-import { Card, Row, Col, Form, Input, Button } from 'antd';
+import { Card, message, Col, Form, Input, Button } from 'antd';
 import { storage } from '@/utils/utils';
 import { FormInfo, User, userProfitInfo, userTypeInfo } from '@/api/User';
 import router from 'umi/router';
@@ -17,14 +17,13 @@ class HorizontalLoginForm extends React.Component {
     this.setState = {
       info:storage.get('cutuserInfo')?storage.get('cutuserInfo'):{}
     }
-    if (storage.get('cutuserInfo').formStatus-0 == 1) {
+    // if (storage.get('cutuserInfo').formStatus-0 == 1) {
        userTypeInfo(storage.get('cutuserInfo').userId).then(res => {
       if (res?.data) {
         this.props.form.setFieldsValue({ ...res.data })
-        console.log(res.data);
        }
      })
-    }
+    // }
   }
 
   handleSubmit = e => {
@@ -32,14 +31,16 @@ class HorizontalLoginForm extends React.Component {
     
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        userProfitInfo(values).then(res => {
+        
+        userProfitInfo(storage.get('cutuserInfo').inviteCode,values).then(res => {
           if (res?.success) {
+            message.success(formatMessage({id:'Submittedsuccessfully'}))
              return User()  
           }
         }).then(res => {
           if (res?.success) {
             storage.set('cutuserInfo', { ...res.data.user, ...res.data.role})
-            router.push('/customer/management/index')
+            // router.push('/customer/management/index')
           }
         })
       }
@@ -59,58 +60,76 @@ class HorizontalLoginForm extends React.Component {
       <Card  bordered={false} >
         <Col push={2}>
       <Form layout="horizontal" onSubmit={this.handleSubmit} style={{width:'800px'}}>
+      <Form.Item style={{'display':'none'}}>
+          {getFieldDecorator('id')(
+            <Input
+            />,
+          )}
+        </Form.Item>
         <Form.Item label={formatMessage({id:'name'})}>
-          {getFieldDecorator('partnerName', {
-            rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
-          })(
+          {getFieldDecorator('partnerName', 
+          // {
+          //   rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
+          // }
+          )(
             <Input
               placeholder="Username"
             />,
           )}
         </Form.Item>
         <Form.Item label={formatMessage({id:'Telephone'})}>
-          {getFieldDecorator('phone', {
-            rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
-          })(
+          {getFieldDecorator('phone', 
+          // {
+          //   rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
+          // }
+          )(
             <Input
               placeholder="phone"
             />,
           )}
         </Form.Item>
         <Form.Item label={formatMessage({id:'address'})}>
-          {getFieldDecorator('address', {
-            rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
-          })(
+          {getFieldDecorator('address', 
+          // {
+          //   rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
+          // }
+          )(
             <Input
               placeholder="address"
             />,
             )}
           </Form.Item>
             
-           <Form.Item  label={formatMessage({id:'DiscordId'})}>
-          {getFieldDecorator('tgId', {
-            rules: [{ required: true, message:formatMessage({id:'PleaseEnter'}) }],
-          })(
+           <Form.Item  label={storage.get('cutuserInfo').roleId != 4?formatMessage({id:'telegramId'}):formatMessage({id:'telegramId'})}>
+          {getFieldDecorator('tgId', 
+          // {
+          //   rules: [{ required: true, message:formatMessage({id:'PleaseEnter'}) }],
+          // }
+          )(
             <Input
-              placeholder="tgId"
+              placeholder={formatMessage({id:'PleaseEnter'})}
             />,
             )}
           </Form.Item>
-          <Form.Item  label={formatMessage({id:'telegramId'})}>
-          {getFieldDecorator('twitterId', {
-            rules: [{ required: true, message: formatMessage({id:'PleaseEnter'})}],
-          })(
+          <Form.Item  label={formatMessage({id:'twitterId'})}>
+          {getFieldDecorator('twitterId', 
+          // {
+          //   rules: [{ required: true, message: formatMessage({id:'PleaseEnter'})}],
+          // }
+          )(
             <Input
               placeholder="twitterId"
             />,
           )}
             </Form.Item>
             {
-              storage.get('cutuserInfo').roleId == 3 ? <>
+              storage.get('cutuserInfo').roleId != 4 ? <>
                    <Form.Item  label={formatMessage({id:'FCview'})}>
-          {getFieldDecorator('knowFreeCity', {
-            rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
-          })(
+          {getFieldDecorator('knowFreeCity', 
+          // {
+          //   rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
+          // }
+          )(
             <TextArea
               placeholder="knowFreeCity"
               rows={3}
@@ -118,9 +137,11 @@ class HorizontalLoginForm extends React.Component {
           )}
           </Form.Item>
           <Form.Item  label={formatMessage({id:'Torture'})}>
-          {getFieldDecorator('projectExperience', {
-            rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
-          })(
+          {getFieldDecorator('projectExperience', 
+          // {
+          //   rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
+          // }
+          )(
             <TextArea
               placeholder="knowFreeCity"
               rows={3}
@@ -128,9 +149,11 @@ class HorizontalLoginForm extends React.Component {
           )}
           </Form.Item>
           <Form.Item label={formatMessage({id:'PromotionTeam'})}>
-          {getFieldDecorator('promoteTeam', {
-            rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
-          })(
+          {getFieldDecorator('promoteTeam', 
+          // {
+          //   rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
+          // }
+          )(
             <TextArea
               placeholder="knowFreeCity"
               rows={3}
@@ -138,9 +161,11 @@ class HorizontalLoginForm extends React.Component {
           )}
         </Form.Item>
         <Form.Item  label={formatMessage({id:'HowToPromote'})}>
-          {getFieldDecorator('promoteWay', {
-            rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
-          })(
+          {getFieldDecorator('promoteWay', 
+          // {
+          //   rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
+          // }
+          )(
             <TextArea
             placeholder="knowFreeCity"
             rows={3}
@@ -148,9 +173,11 @@ class HorizontalLoginForm extends React.Component {
           )}
         </Form.Item>
         <Form.Item  label={formatMessage({id:'ProjectSupport'})}>
-          {getFieldDecorator('supportNeeded', {
-            rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
-          })(
+          {getFieldDecorator('supportNeeded', 
+          // {
+          //   rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
+          // }
+          )(
             <TextArea
               placeholder="knowFreeCity"
               rows={3}
@@ -159,9 +186,11 @@ class HorizontalLoginForm extends React.Component {
                 </Form.Item>
               </> : <>
               <Form.Item  label={formatMessage({id:'promoterOfFreecity'})}>
-          {getFieldDecorator('promoteWay', {
-            rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
-          })(
+          {getFieldDecorator('promoteWay', 
+          // {
+          //   rules: [{ required: true, message: formatMessage({id:'PleaseEnter'}) }],
+          // }
+          )(
             <TextArea
             placeholder="knowFreeCity"
             rows={3}
@@ -171,8 +200,20 @@ class HorizontalLoginForm extends React.Component {
               </>
             }
             
+            <Form.Item  label={formatMessage({id:'remarks'})} extra={formatMessage({id:'FreeCityBackForm'})}>
+               {/* {getFieldDecorator('FreeCityBackForm', {
+                 rules: [{ required: false, message: formatMessage({id:'PleaseEnter'}) }],
+               })(
+                 <TextArea
+                  placeholder={formatMessage({id:'FreeCityBackForm'})}
+                  value={}
+                   rows={1}
+                   disabled
+               />,
+               )} */}
+                   </Form.Item>
             <Form.Item>
-            <Col >
+            {/* <Col >
               {
                 storage.get('cutuserInfo').formStatus==0 ?
                <> <Form.Item  label={formatMessage({id:'remarks'})}>
@@ -190,8 +231,8 @@ class HorizontalLoginForm extends React.Component {
                     </> 
                : ''
                 }
-                 </Col>
-          
+                 </Col> */}
+                 <Button type="primary" htmlType='submit' style={{marginLeft:'20px'}}>{formatMessage({id:'Submit'})}</Button>
         </Form.Item>
         </Form>
         </Col>

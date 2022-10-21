@@ -33,7 +33,7 @@
 //   'city_partner': '城市合伙人',
 //   'community_partner': '社区合伙人',
 //   'OrdinaryUsers': '普通用户',
-//   'Account': '账户',
+//   'Account': '钱包地址',
 //   'PleaseNumber':'请输入账户',
 //   'Role': '角色',
 //   'Enable': '启用',

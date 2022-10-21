@@ -1,5 +1,5 @@
-importScripts("https://admin.gamehualing.com/precache-manifest.646a76c9d7a8a434bc9425e6c0aa6fa6.js", "https://admin.gamehualing.com/workbox-v3.6.3/workbox-sw.js");
-workbox.setConfig({modulePathPrefix: "https://admin.gamehualing.com/workbox-v3.6.3"});
+importScripts("./precache-manifest.7b10cdd499a074e429d4d925628faad9.js", "./workbox-v3.6.3/workbox-sw.js");
+workbox.setConfig({modulePathPrefix: "./workbox-v3.6.3"});
 /* globals workbox */
 /* eslint-disable no-restricted-globals */
 workbox.core.setCacheNameDetails({

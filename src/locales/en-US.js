@@ -6,9 +6,10 @@
 export default {
   'navBar.lang': 'Language',
   'Userlogin': 'User login',
-  'user': 'Please enter account name',
+  'user': 'Please enter wallet address',
   'PleasePassword': 'Enter your password',
   'login': 'Log in',
+  'Mainnet':'Network error, please switch to the ethereum mainnet',
   'Forgotpassword': 'Password',
   'FreecityAgent': 'FreeCity proxy backend',
   'forgot-password': 'Forgot password',
@@ -19,9 +20,11 @@ export default {
   'DiscordId':'Discord ID',
   'telegram': 'telegram',
   'telegramId': 'telegram ID',
+  'twitterId':'twitter ID',
   'customerManage': 'Customer service',
   'accountManage': 'Account settings',
   'roleManage': 'Role settings',
+  "CommissionSet":"Commission settings",
   'Exitlogin': 'Sign out',
   'PersonalInformation': 'Personal information',
   'home': 'Home page',
@@ -34,7 +37,9 @@ export default {
   'city_partner': 'City partners',
   'community_partner': 'Community partners',
   'OrdinaryUsers': 'Normal account',
-  'Account': 'Account name',
+  'WalletAddress': 'Wallet address',
+  "Account":"Account",
+  "InvitationLink":"Invitation link",
   'Role': 'Role',
   'Enable': 'Enable',
   'Disable': 'Disable',
@@ -81,13 +86,14 @@ export default {
   'BindParent': 'Bind the recommender',
   'state': 'State',
   'EarnCommission': 'Amount of commission earned',
-  'ModifyAccount': "Edit account name",
+  'ModifyAccount': "Edit account",
   'ModifyRole': 'Modify role',
   'RoleInformation': 'Role information',
   "preservation": 'preservation',
   'CommissionProportionFirst': '请先获取佣金比例',
   'AddedSuccessfully': 'Added successfully',
   'ModifiedSuccessfully':'Modified successfully',
+  'Submittedsuccessfully':'Submitted successfully',
   'whole': 'whole',
   'addedbecome':'After the account is successfully added, it will automatically become',
   'sureToAdd': 'Are you sure to add?',
@@ -107,16 +113,38 @@ export default {
   'LoginSuccessful': 'Login successful',//登陆成功
   'CommissionDetails': 'Commission details',//佣金明细
   'numbersOrLetters': '(Only enter numbers or letters)',//（只能输入数字或字母）
-  'yourEmail': 'Please input your email',//请输入邮箱
+  'yourEmail': 'Please input your Address',//请输入邮箱
   'Passwordempty': 'Please fill in the password',//请填写密码,
   'recommenderCode': 'Please enter the recommender invitation code', //请输入上级邀请码
   'AccountInformation': 'Account information',//账户信息
   'FreeCityBackForm': 'FreeCity partners are eligible to pay in cities. If you can accept, please fill in and send back the form',//freecity城市合伙人为付费资格，以城市为单位，如能接受，请天好表格回传
   'PleaseEnter': 'Please enter', //请输入
   'admin': 'admin', //管理员
+  'officialAdmin':'official platform',
   'NoAccess': 'No access',
   'description': 'The page you are looking for does not exist',//
   'BackHome': 'Back Home',//返回首页
   'UserManual':'User manual',
+  //设置
+  "privateKey":"Private key",
+  "enterPrivateKey":"Please enter the private key",
+  "transfer":"Minimum transfer amount",
+  "enterTransfer":"Please enter the minimum transfer amount",
+  "cycle":"Commission settlement period",
+  "enterCycle":"Please enter the commission settlement period",
+  "day":"0~23",
+  'loginInfo':'Login successfully, improve the form information to enjoy more rights and interests',
+  'directBinding':'directBinding',
+  'userType':'userType',
+  'transactionHash':'transactionHash',
+  'blockNumber':'blockNumber',
+  'gasUsed':'gasUsed',
+  'contractAddress':'contractAddress',
+  'status':'status',
+  'fromAddress':'fromAddress',
+  'toAddress':'toAddress',
+  'sendValue':'sendValue',
+  'createTime':'createTime',
+  "remark":"website address"
 };
 
