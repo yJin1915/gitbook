@@ -3,9 +3,10 @@
 // export default {
 //   'navBar.lang': '语言',
 //   'Userlogin': '用户登录',
-//   'user': '请输入账户',
+//   'user': '请输入钱包地址',
 //   'PleasePassword': '请输入密码',
 //   'login': '登录',
+//   'Mainnet':'网络错误，请选择以太坊主网',
 //   'Forgotpassword': '忘记密码',
 //   'FreecityAgent': 'Free city 代理后台',
 //   'Userempty': '账户不能为空',
@@ -18,9 +19,11 @@
 //   'DiscordId':'Discord ID',
 //   'telegram': 'telegram',
 //   'telegramId': 'telegram ID',
+//   'twitterId':'twitter ID',
 //   'customerManage': '客户列表',
 //   'accountManage': '账户管理',
 //   'roleManage': '角色管理',
+//   "CommissionSet":"返佣设置",
 //   'Exitlogin': '退出登录',
 //   'PersonalInformation': '个人信息',
 //   'home': '首页',
@@ -33,7 +36,9 @@
 //   'city_partner': '城市合伙人',
 //   'community_partner': '社区合伙人',
 //   'OrdinaryUsers': '普通用户',
+//   'WalletAddress': '钱包地址',
 //   'Account': '账户',
+//   "InvitationLink":"邀请链接",
 //   'PleaseNumber':'请输入账户',
 //   'Role': '角色',
 //   'Enable': '启用',
@@ -88,6 +93,7 @@
 //   'CommissionProportionFirst': '请先获取佣金比例',
 //   'AddedSuccessfully': '添加成功！',
 //   'ModifiedSuccessfully':'修改成功',
+//   'Submittedsuccessfully':'提交成功',
 //   'whole': '全部',
 //   'addedbecome':'账户添加成功后将自动成为',
 //   'sureToAdd': '是否确认添加？',
@@ -109,15 +115,37 @@
 //   'LoginSuccessful': '登陆成功',//登陆成功
 //   'CommissionDetails': '佣金明细',//佣金明细
 //   'numbersOrLetters': '（只能输入数字或字母）',//（只能输入数字或字母）
-//   'yourEmail': '请输入邮箱',//请输入邮箱
+//   'yourEmail': '请输入地址',//请输入邮箱
 //   'Passwordempty': '请填写密码',//请填写密码,
 //   'recommenderCode': '请输入上级邀请码', //请输入上级邀请码
 //   'AccountInformation': '账户信息',//账户信息
 //   'FreeCityBackForm': 'freecity城市合伙人为付费资格，以城市为单位，如能接受，请天好表格回传',//freecity城市合伙人为付费资格，以城市为单位，如能接受，请天好表格回传
 //   'PleaseEnter': '请输入',
 //   'admin': 'admin',
+//   'officialAdmin':'官方平台',
 //   'NoAccess': '无权访问',
 //   'description': '你要找的页面不存在',//
 //   'BackHome': '返回首页',
 //   'UserManual':'使用手册',
+//设置
+// "privateKey":"私钥",
+// "enterPrivateKey":"请输入私钥",
+// "transfer":"最小转账金额",
+// "enterTransfer":"请输入最小转账金额",
+// "cycle":"佣金结算周期",
+// "enterCycle":"请输入佣金结算周期",
+// "day":"0~23",
+// 'loginInfo':'登录成功，完善表单信息，享受更多权益',
+// 'directBinding':'directBinding',
+// 'userType':'用户类型',
+// 'transactionHash':'交易哈希',
+// 'blockNumber':'区块',
+// 'gasUsed':'gasUsed',
+// 'contractAddress':'合约地址',
+// 'status':'状态',
+// 'fromAddress':'fromAddress',
+// 'toAddress':'toAddress',
+// 'sendValue':'sendValue',
+// 'createTime':'创建事件',
+// "remark":"官网地址"
 // };

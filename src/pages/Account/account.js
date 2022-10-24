@@ -17,7 +17,7 @@ export default function account (props) {
    const [usersInfo, setUsersInfo] = useState({
      pageNum: 1,
      pageSize: 10,
-     emailLike: '', //账号
+     walletAddress: '', //账号
      roleId: '', //roleId
      status: '',  //状态
      userlist: [], //用户列表
@@ -61,13 +61,13 @@ export default function account (props) {
     const InputChange = e => {
       setUsersInfo({
         ...usersInfo,
-        emailLike: e.target.value,
+        walletAddress: e.target.value,
       })
     }
     const  Empty = e => {
       setUsersInfo({
         ...usersInfo,
-        emailLike: '', //账号
+        walletAddress: '', //账号
        roleId: '', //roleId
        status: '',  //状态
       })
@@ -79,7 +79,7 @@ export default function account (props) {
       pageNum: usersInfo.pageNum,
       pageSize: usersInfo.pageSize,
       status: usersInfo.status,
-      emailLike: usersInfo.emailLike,
+      walletAddress: usersInfo.walletAddress,
       roleId:usersInfo.roleId
     }
 await    SubmitUserList(params).then(res => {
@@ -172,7 +172,7 @@ await    SubmitUserList(params).then(res => {
   const page = (value) => {
     let params = {
       status: usersInfo.status,
-      emailLike: usersInfo.emailLike,
+      walletAddress: usersInfo.walletAddress,
       roleId: usersInfo.roleId,
       ...value,
     }
@@ -211,9 +211,9 @@ await    SubmitUserList(params).then(res => {
       <div className={styles.account}>
             {/* form  */}
             <Form layout='vertical'   >
-              <Form.Item label={formatMessage({id:'Account'})}  >
+              <Form.Item label={formatMessage({id:'WalletAddress'})}  >
                 <Input placeholder={formatMessage({ id: 'user' })}
-                 allowClear value={usersInfo.emailLike} onChange={InputChange}/>
+                 allowClear value={usersInfo.walletAddress} onChange={InputChange}/>
             </Form.Item>
             <Form.Item label={formatMessage({id:'Role'})}  >
            <Select defaultValue={''} style={{ width: 180 }}

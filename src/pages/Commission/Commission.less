@@ -1,66 +1,24 @@
-@import '~antd/lib/style/themes/default.less';
+@import "~antd/lib/style/themes/default.less";
 
-.main {
-  width: 368px;
-  margin: 0 auto;
-  @media screen and (max-width: @screen-sm) {
-    width: 65%;
-  }
+.inp {
   :global {
-    .forgot{
-      // font-size: 30px;
-     text-align: right;
-     cursor: pointer;
-     color: #333333;
-    }
- 
-  }
-
-  .icon {
-    font-size: 24px;
-    color: rgba(0, 0, 0, 0.2);
-    margin-left: 16px;
-    vertical-align: middle;
-    cursor: pointer;
-    transition: color 0.3s;
-
-    &:hover {
-      color: @primary-color;
-    }
-  }
-
-  .other {
-    text-align: left;
-    margin-top: 24px;
-    line-height: 22px;
-
-    .register {
-      float: right;
+    .ant-input-group {
+      width: 500px;
     }
   }
 }
-
-.login_land{
-  position: absolute;
-  top: 50%;
-   left: 50%;
-   transform: translate(-50%,-50%);
-  width: 550px;
-  background-color: #FFF;
-  border-radius: 8px;
-  margin:  auto;
-  padding: 50px 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  :global{
-    .user_login{
-      font-size: @font-size-base;
-       font-size: 25px;
-       font-weight: 600;
-       color: @heading-color;
-        margin-bottom: 30px;
+.formItem{
+  :global {
+    .ant-input-number{
+      display: block;
+      width: 500px;
+    }
+    .ant-input {
+      display: block;
+      width: 500px;
     }
   }
+}
+.hide{
+  display: none;
 }

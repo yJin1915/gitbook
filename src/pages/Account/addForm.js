@@ -15,10 +15,10 @@ class HorizontalLoginForm extends React.Component {
     
     if (type == 'edit') {
       this.props.form.setFieldsValue({
-        email: edit.email,
+        walletAddress: edit.walletAddress,
         inviteCode: edit.inviteCode,
         roleId:edit.roleId,
-        password: '',
+        // password: '',
       })
       this.setState({
         childrenPercent: edit.chidrenCommissionRate,
@@ -43,9 +43,9 @@ class HorizontalLoginForm extends React.Component {
       email: '',
       roleId:4,
     },//添加账户1， 开户成功2
-    timer:null  //定时器
+    timer:null,  //定时器
+    timeout:null
   }
-
 
   // 切换角色佣金比例
   handleSubmit = e => {
@@ -98,8 +98,8 @@ class HorizontalLoginForm extends React.Component {
       if (!err) {
         if (!this.state.childrenPercent) return message.error(formatMessage({ id: 'CommissionProportionFirst' }))
        const params= {
-          email: values.email,
-          password: values.password,
+        walletAddress: values.walletAddress,
+          // password: values.password,
           roleId: values.roleId,
           inviteCode: values.inviteCode,
           parentPercent: this.state.parentPercent,
@@ -107,18 +107,25 @@ class HorizontalLoginForm extends React.Component {
        }
         if (this.props.type == 'add') {
           if (!this.state.visible) {
-            setEmail(values.inviteCode).then(res => {
-              if (res?.data) {
-                this.setState({
-                  addAndOpen: {
-                    email: res.data,
-                    roleId:values.roleId,
-                  },
-                  visible: true,
-                 });
-              }
-            })
-           
+            // setEmail(values.inviteCode).then(res => {
+            //   if (res?.data) {
+            //     this.setState({
+            //       addAndOpen: {
+            //         email: res.data,
+            //         roleId:values.roleId,
+            //       },
+            //       visible: true,
+            //      });
+            //   }
+            // })
+             this.setState({
+              addAndOpen: {
+                walletAddress: values.walletAddress,
+                roleId:values.roleId,
+              },
+              visible: true,
+             });
+             
           } else {
             userAdd(params).then(res => {
             if (res?.success) {
@@ -177,7 +184,6 @@ class HorizontalLoginForm extends React.Component {
       }, delay)
    })     
   }
-  // 输入密码
   onPassword = () => {
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -202,32 +208,40 @@ class HorizontalLoginForm extends React.Component {
       }
     })
   }
+
+  timeout=null;
+  throttle = (fn,ms)=>{
+    return ()=>{
+      this.timeout&&clearTimeout(this.timeout)
+      this.timeout = setTimeout(()=>{
+        fn.apply(this)
+      },ms)
+    }
+  }
+
   render() {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
     const { childrenPercent, parentPercent } = this.state
    const { TextArea } = Input;
 
     return (
-      <Form   style={{marginTop:'20px'}}  className={styles.addForm}  labelCol={{ span: 12 }} wrapperCol={{ span: 8 }} >
+      <Form   style={{marginTop:'20px'}}  className={styles.addForm}  labelCol={{ span: 8 }} wrapperCol={{ span: 12 }} >
        
-        <Form.Item    label={formatMessage({ id: 'Account' })} >
-          {getFieldDecorator('email', {
-            rules: [{
-              type: 'email',
-              message: formatMessage({id:'PleaseMailbox'})
-              },
+        <Form.Item    label={formatMessage({ id: 'WalletAddress' })} onChange={this.throttle(this.onPassword,1000)}>
+          {getFieldDecorator('walletAddress', {
+            rules: [
               {
               required: true,
               message: formatMessage({id:'yourEmail'}),
               }],
           })(
             <Input
-              placeholder="email"
+              placeholder="Address"
               disabled={this.props.type=='edit'}
             />,
           )}
         </Form.Item>
-        {
+        {/* {
           this.props.type=='add'? <Form.Item  label={formatMessage({ id: 'password' })} onChange={async()=>await debounce(this.onPassword(),1000)}>
           {getFieldDecorator('password', {
             rules: [{ required: true, message: formatMessage({id:'PleasePassword'}) }],
@@ -247,12 +261,12 @@ class HorizontalLoginForm extends React.Component {
             />,
           )}
         </Form.Item>
-       }
+       } */}
         <Form.Item  label={formatMessage({ id: 'Role' })}>
           {getFieldDecorator('roleId', {
             rules: [{ required: true, message: formatMessage({id:'PleRole'}) }],
           })(
-            <Radio.Group onChange={this.handleSubmit}>
+            <Radio.Group onChange={this.handleSubmit} >
             {
               this.props.currentRole.map(item => {
                 return  <Radio key={item.roleId} value={item.roleId} style={{width:'100%'}}>{formatMessage({id:item.roleCode})}</Radio>
@@ -302,7 +316,7 @@ class HorizontalLoginForm extends React.Component {
         >
           <div style={{ margin: '15px' }}>
             {formatMessage({ id: 'addedbecome' })}
-            {` `}{this.state.addAndOpen.email }{` `}
+            {` `}{this.state.addAndOpen.walletAddress }{` `}
             {this.state.addAndOpen.roleId==2?formatMessage({id:'country_partner'}):this.state.addAndOpen.roleId==3?formatMessage({id:'city_partner'}):this.state.addAndOpen.roleId==4?formatMessage({id:'community_partner'}):''}
             {formatMessage({ id: 'sureToAdd' })}</div>
          

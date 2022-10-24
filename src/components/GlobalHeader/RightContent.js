@@ -18,7 +18,6 @@ export default class GlobalHeaderRight extends PureComponent {
   const { currentUser, onMenuClick, theme,collapsed } = this.props;
     const { Option } = Select;
     const goLogin = async (value) => {
-      console.log(11);
       if (value == '/login') {
         storage.remove('FcToken')
         storage.remove('CurrentRole')

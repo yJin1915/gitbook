@@ -2,21 +2,21 @@
 export default [
   // 登录
   {
+    path: '/login',
+    component: '../layouts/UserLayout',
+    routes: [
+      { path: '/', redirect: '/login' },
+      { path: '/login', component: './User/login' },
+      // { path: '/user/register', component: './User/Register' },
+    ],
+  },
+  {
     path: '/adlogin',
     component: '../layouts/UserLayout',
     routes: [
       { path: '/', redirect: '/login' },
       { path: '/adlogin', component: './User/login' },
       // { path: '/user/register', component: './User/Register' },
-    ],
-  },
-   // 用户登录
-   {
-    path: '/login',
-    component: '../layouts/UserLayout',
-    routes: [
-      { path: '/', redirect: '/login' },
-      { path: '/login', component: './User/UserLogin' },
     ],
   },
    // 使用手册
@@ -55,7 +55,11 @@ export default [
             name: 'columnar_details',
             component:'./Customerlist/detailsList'
           },
-          
+          {
+            path: '/customer/management/index/transfer_details',
+            name: 'columnar_details',
+            component:'./Customerlist/transferList'
+          },
         ]
       },
       //    账户管理
@@ -66,14 +70,14 @@ export default [
         component: './Account/account',
       },
       // 角色管理
-      // {
-      //   path: '/role/management/index',
-      //   name: 'account',
-      //   icon: 'setting',
-      //   component: './UserRole/userRole',
-      // },
       {
         path: '/role/management/index',
+        name: 'account',
+        icon: 'setting',
+        component: './UserRole/userRole',
+      },
+      {
+        path: 'commission/management/index',
         name: 'commission',
         icon: 'setting',
         component: './Commission/commission',

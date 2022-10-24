@@ -18,9 +18,9 @@ export default function TableList (props) {
       align:'center'
     },
     {
-      title: formatMessage({id:'Account'}),
-      dataIndex: "childrenEmail",
-      key: "childrenEmail",
+      title: formatMessage({id:'WalletAddress'}),
+      dataIndex: "childrenAddress",
+      key: "childrenAddress",
       align: 'center',
       render: (text) => (
         text?text:'/'
@@ -45,8 +45,8 @@ export default function TableList (props) {
     },
     {
       title: formatMessage({id:'BindParent'}),
-      dataIndex: "parentEmail",
-      key: "parentEmail",
+      dataIndex: "parentAddress",
+      key: "parentAddress",
       align:'center',
       render: (text) => (
          text==''|| text==null ? '/':text
@@ -74,7 +74,13 @@ export default function TableList (props) {
         </>
       )
     },
-    
+    {
+      title: formatMessage({id:'state'}),
+      key:'status',
+      render: ( record) => (
+        record.status==1?formatMessage({id:'Enable'}):formatMessage({id:'Disable'})
+      )
+    },
     {
       title: formatMessage({id:'operation'}),
       width: 400,
@@ -84,6 +90,7 @@ export default function TableList (props) {
         return (
           <div style={{color:'pink'}}>
           <Button type="link" onClick={()=>onCustomer(record)}>{formatMessage({id:'CommissionDetails'})}</Button>
+          <Button type="link" onClick={()=>onTransfer(record)}>Transfer record</Button>
           <Button  onClick={()=>InfoUser(record)} disabled={record.formExists==1?false:true} type="link" >{formatMessage({id:'ViewFormInfo'})} </Button>
           <Button type="link" disabled={record.hasSuperior !==1?true:false} onClick={()=>relieveVisible(record.childrenUserId)}>{formatMessage({id:"Unbind"})} </Button>
           </div>
@@ -114,6 +121,15 @@ export default function TableList (props) {
       parentUserId: value.parentUserId})
 
   }
+  const onTransfer = (value) => {
+    router.push({
+      pathname: '/customer/management/index/transfer_details',
+    })
+    // 存储请求需要的客户佣金数据
+    storage.set('transferDetails',{ walletAddress: value.childrenAddress})
+
+  }
+  
   const [userType, setUserType] = useState(1) //1:城市，2社区，
   const [userForm, setUserForm] = useState({
     partnerName: '',
@@ -173,6 +189,7 @@ export default function TableList (props) {
     <div className={styles.table}>
       <Table columns={columns} dataSource={props.data.dataList}
         bordered
+        scroll={{ x: 992 }}
         rowKey={(text,record)=>text.childrenUserId}
         tableLayout='auto' columnWidth='200px' defaultSortOrder pagination={
           {

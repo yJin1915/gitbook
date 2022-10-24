@@ -19,8 +19,14 @@ export const userDataList = (params) => {
  * @returns 
  */
 export const userCommissionList = (params) => {
-  console.log(params);
   return   request(`/partner/user/commissionList${paramsPath(params)}`,{
     method: 'get',
+  })
+}
+
+export const transferList = (params) => {
+  return   request(`/partner/transfer/list`,{
+    method: 'post',
+    body:JSON.stringify({...params})
   })
 }

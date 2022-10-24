@@ -1,15 +1,16 @@
 import React, { PureComponent } from 'react';
 import { formatMessage } from 'umi/locale';
-import { Layout, message, Icon, Col } from 'antd';
+import { Layout, message, Icon, Modal } from 'antd';
 import Animate from 'rc-animate';
 import { connect } from 'dva';
 import router from 'umi/router';
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
 import styles from './Header.less';
+import { checkFormExists } from '@/api/User';
+import { storage } from '@/utils/utils';
 
 const { Header } = Layout;
-
 class HeaderView extends PureComponent {
   constructor(props) {
     super(props);
@@ -27,6 +28,19 @@ class HeaderView extends PureComponent {
   }
 
   componentDidMount() {
+    let cutuserInfo = storage.get('cutuserInfo');
+    if(cutuserInfo&&cutuserInfo.roleId!=1&&cutuserInfo.roleId!=2){
+      checkFormExists(storage.get('cutuserInfo').userId).then(res => {
+        if(!res?.data){
+          Modal.info({
+            title: `${formatMessage({ id: 'loginInfo' })}`,
+            onOk() {
+              router.push('/current_userInfo/userInfo')
+            },
+          });
+        }
+      })
+    }
     document.addEventListener('scroll', this.handScroll, { passive: true });
   }
 

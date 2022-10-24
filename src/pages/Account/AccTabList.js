@@ -17,18 +17,18 @@ export default function AccTabList (props) {
       align:'center'
     },
     {
-      title: formatMessage({id:'Account'}),
-      dataIndex: "email",
-      key: "email",
+      title: formatMessage({id:'WalletAddress'}),
+      dataIndex: "walletAddress",
+      key: "walletAddress",
     },
-    {
-      title: formatMessage({id:'password'}),
-      dataIndex: "password",
-      key: "password",
-      render: (text,record) => (
-       "******"
-      )
-    },
+    // {
+    //   title: formatMessage({id:'password'}),
+    //   dataIndex: "password",
+    //   key: "password",
+    //   render: (text,record) => (
+    //    "******"
+    //   )
+    // },
     {
       title: formatMessage({id:'Role'}),
       dataIndex: "roleId",
@@ -55,7 +55,7 @@ export default function AccTabList (props) {
     },
     {
       title: formatMessage({id:'state'}),
-      width: '10%',
+      width: 100,
       key:'status1',
       render: ( record) => (
         record.status==1?formatMessage({id:'Enable'}):formatMessage({id:'Disable'})
@@ -126,6 +126,7 @@ export default function AccTabList (props) {
 
     <div className={styles.table}>
       <Table columns={columns} dataSource={props.usersInfo.userlist}
+        scroll={{ x: 992 }}
         tableLayout='auto' columnWidth='200px' defaultSortOrder pagination={
           {
             pageSize: usersInfo.pageSize,

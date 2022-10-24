@@ -11,15 +11,28 @@ export default function detailsList (props) {
   const columns = [
     {
       title: formatMessage({id:'SerialNumber'}),
-      dataIndex: 'index',
-      key: 'index',
+      dataIndex: 'id',
+      key: 'id',
       align:'center',
-      render: (text, record, index) => 	`${(detailed.pageNum - 1) * detailed.pageSize + (index + 1)}`,
+      // render: (text, record, index) => 	`${(detailed.pageNum - 1) * detailed.pageSize + (index + 1)}`,
     },
+    // {
+    //   title: "partnerAddress",
+    //   dataIndex: 'partnerAddress',
+    //   key: 'partnerAddress',
+    //   align:'center',
+    // },
+    
+    // {
+    //   title: "childrenAddress",
+    //   dataIndex: 'childrenAddress',
+    //   key: 'childrenAddress',
+    //   align:'center',
+    // },
     {
-      title: formatMessage({id:'Account'}),
-      dataIndex: 'account',
-      key: 'account',
+      title: formatMessage({ id: 'Account' }),
+      dataIndex: 'childrenAddress',
+      key: 'childrenAddress',
       align:'center',
     },
     {
@@ -61,21 +74,40 @@ export default function detailsList (props) {
         record.dcType==1?text+'FCC':record.dcType==2?text+'FCR':record.dcType==3?text+'MATIC':''
      )
     },
+    {
+      title: formatMessage({id:'directBinding'}),
+      dataIndex: 'directBinding',
+      key: 'directBinding',
+      align: 'center',
+      render: (text, record) => (
+        record.directBinding==0?'yes':"no"
+     )
+    },
+    {
+      title: formatMessage({id:'userType'}),
+      dataIndex: 'userType',
+      key: 'userType',
+      align: 'center',
+      render: (text, record) => (
+        record.userType==0?'普通':record.userType==1?'社区':record.userType==2?'城市':'国家'
+     )
+    },
   ];
 
-  const onChange = (e) => {
-    console.log(e,page, '分页onChange');
-    detailedList({ pageNum:e,...storage.get('CustomerDetails')})
+  const onChange = (e,page) => {
+    detailedList({ pageNum:e,pageSize:page,...storage.get('CustomerDetails')})
 
   }
   const onShowSizeChange =async (e,page) => {
-    if (page >= detailed.total) return
-     else {
-      await   setDetailed({
-        ...detailed,
-        pageSize:page
-      })
-    }
+    // if (page >= detailed.total) return
+    //  else {
+      // await   setDetailed({
+      //   ...detailed,
+      //   pageNum:e,
+      //   pageSize:page
+      // })
+      detailedList({ pageNum:e,pageSize:page,...storage.get('CustomerDetails')})
+    // }
    
   }
   // 获取详情请求
@@ -120,13 +152,14 @@ export default function detailsList (props) {
       <Card bordered={false}>
         <Table dataSource={detailed.data}
             rowKey={(text,record)=>text.id}
+            scroll={{ x: 992 }}
            columns={columns} pagination={
           {
             pageSize: detailed.pageSize,
             // current: 1,
             defaultCurrent: detailed.pageNum,
             pageSizeOptions: [
-              '10', '20', '30', '50'
+              '2','10', '20', '30', '50'
             ],
             showQuickJumper: true,
             showSizeChanger: true,

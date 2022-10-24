@@ -30,23 +30,23 @@ const userInfo = () => {
       <Card bordered={false}>
         <Descriptions column={1} title={formatMessage({ id: 'PersonalInformation' })} className={styles. userInfo}>
           <Descriptions.Item label={formatMessage({ id: 'Account' })}  >
-            <span >{ user?.email? user.email:'/'}</span>
+            <span >{ user?.email? user.email:user.walletAddress}</span>
           </Descriptions.Item>
           <Descriptions.Item label={formatMessage({ id: 'identity' })}  >
-            <span >{ user?.roleCode?formatMessage({id: user.roleCode}):'/'}</span>
+            <span >{ user?.roleCode?user.roleCode=='admin'?formatMessage({ id: 'officialAdmin' }):formatMessage({id: user.roleCode}):'/'}</span>
           </Descriptions.Item>
           <Descriptions.Item label={formatMessage({ id: 'comRate' })}  >
             <span >{ user?.userId !==1 && user.commissionPercent!==null ?  user.commissionPercent+'%':'/'}</span>
           </Descriptions.Item>
           <Descriptions.Item label={formatMessage({ id: 'superior' })}  >
-            <span >{ user?.userId==1?'/': user?.parentEmail}</span>
+            <span >{ user?.userId==1?'/':user?.roleCode=="country_partner"?formatMessage({ id: 'officialAdmin' }): user?.parentEmail}</span>
           </Descriptions.Item>
           <Descriptions.Item label={formatMessage({ id: 'MyCode' })}  >
             <span >{ user?.inviteCode? user.inviteCode:'/'}</span>
           </Descriptions.Item>
           {
-             user?.userId===1?'':( <Descriptions.Item label={formatMessage({ id: 'Account' })}  >
-            <span >{formatMessage({ id: 'Userlogin' })}</span>
+             user?.userId===1&&!user?.regUrl?'':( <Descriptions.Item label={formatMessage({ id: 'InvitationLink' })}  >
+            <span >{user?.regUrl+"?code="+user?.inviteCode}</span>
           </Descriptions.Item>)
          }
         </Descriptions>
