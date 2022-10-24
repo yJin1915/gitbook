@@ -24,7 +24,8 @@ class HorizontalLoginForm extends React.Component {
         childrenPercent: edit.chidrenCommissionRate,
         parentPercent:edit.parentCommissionRate
       })
-    } else {
+    }
+    else {
       if (storage.get('cutuserInfo').roleId == 3) {
         this.props.form.setFieldsValue({
           roleId:4
@@ -50,46 +51,62 @@ class HorizontalLoginForm extends React.Component {
   // 切换角色佣金比例
   handleSubmit = e => {
     e.preventDefault();
-    let code = this.props.form.getFieldsValue().inviteCode ? this.props.form.getFieldsValue().inviteCode : storage.get('cutuserInfo').inviteCode
-    
-    if (storage.get('cutuserInfo').roleId == 1) {
-      this.props.form.validateFields((err, values) => {
-        if (!err) {
-          this.setState({
-            loading:true
-          })
-          code = values.inviteCode
-          GetScale({
-            inviteCode:code,
-            roleId:e.target.value
-          }).then(res => {
-            if (res?.success) {
-              this.setState({
-                childrenPercent: res?.data?.childrenPercent,
-                parentPercent: res.data?.parentPercent,
-                loading:false
-              })
-            }
-          })
-        }
-      })
-    } else {
+    let role = e.target.value
+    if(role==2){
       this.setState({
-        loading:true
+        childrenPercent: 20,
+        parentPercent: 0
       })
-      GetScale({
-        inviteCode:code,
-        roleId:e.target.value
-      }).then(res => {
-        if (res?.success) {
-          this.setState({
-            childrenPercent: res?.data?.childrenPercent,
-            parentPercent: res.data?.parentPercent,
-            loading:false
-          })
-        }
+    }else if(role==3){
+      this.setState({
+        childrenPercent: 15,
+        parentPercent: 5
+      })
+    }else if(role==4){
+      this.setState({
+        childrenPercent: 10,
+        parentPercent: 10
       })
     }
+    // let code = this.props.form.getFieldsValue().inviteCode ? this.props.form.getFieldsValue().inviteCode : storage.get('cutuserInfo').inviteCode
+    // if (storage.get('cutuserInfo').roleId == 1) {
+    //   this.props.form.validateFields((err, values) => {
+    //     if (!err) {
+    //       this.setState({
+    //         loading:true
+    //       })
+    //       code = values.inviteCode
+    //       GetScale({
+    //         inviteCode:code,
+    //         roleId:e.target.value
+    //       }).then(res => {
+    //         if (res?.success) {
+    //           this.setState({
+    //             childrenPercent: res?.data?.childrenPercent,
+    //             parentPercent: res.data?.parentPercent,
+    //             loading:false
+    //           })
+    //         }
+    //       })
+    //     }
+    //   })
+    // } else {
+    //   this.setState({
+    //     loading:true
+    //   })
+    //   GetScale({
+    //     inviteCode:code,
+    //     roleId:e.target.value
+    //   }).then(res => {
+    //     if (res?.success) {
+    //       this.setState({
+    //         childrenPercent: res?.data?.childrenPercent,
+    //         parentPercent: res.data?.parentPercent,
+    //         loading:false
+    //       })
+    //     }
+    //   })
+    // }
     
   };
   // 提交表单
@@ -227,7 +244,9 @@ class HorizontalLoginForm extends React.Component {
     return (
       <Form   style={{marginTop:'20px'}}  className={styles.addForm}  labelCol={{ span: 8 }} wrapperCol={{ span: 12 }} >
        
-        <Form.Item    label={formatMessage({ id: 'WalletAddress' })} onChange={this.throttle(this.onPassword,1000)}>
+        <Form.Item    label={formatMessage({ id: 'WalletAddress' })} 
+        // onChange={this.throttle(this.onPassword,1000)}
+        >
           {getFieldDecorator('walletAddress', {
             rules: [
               {
@@ -276,13 +295,15 @@ class HorizontalLoginForm extends React.Component {
         </Form.Item>
         {
           storage.get('cutuserInfo').roleId ==1? <Form.Item  label={formatMessage({ id: 'SuperiorInvitationCode' })}>
-          {getFieldDecorator('inviteCode', {
-            rules: [{ required: true, message: formatMessage({id:'recommenderCode'}) }],
-          })(
+          {getFieldDecorator('inviteCode', 
+          // {
+          //   rules: [{ required: true, message: formatMessage({id:'recommenderCode'}) }],
+          // }
+          )(
             <Input
               placeholder="inviteCode"
               disabled={this.props.edit.inviteCode && this.props.type=='edit' ? true : false}
-              onChange={()=>this.onChangInCode(this.onFocusCode,2000)}
+              // onChange={()=>this.onChangInCode(this.onFocusCode,2000)}
             />,
           )}
         </Form.Item>:''
@@ -292,7 +313,7 @@ class HorizontalLoginForm extends React.Component {
           {getFieldDecorator('parentPercent', {
             rules: [{ required: false, message: formatMessage({id:'PleaseEnter'}) }],
           })(
-            <TextArea rows={2} placeholder={`${formatMessage({ id: 'KeepForOneself' })}:${parentPercent?parentPercent:0}\n${formatMessage({ id: 'partner' })}:${childrenPercent?childrenPercent:0}`} disabled style={{ resize: 'none' }} /> 
+            <TextArea placeholder={`${childrenPercent?childrenPercent:0}`} disabled style={{ resize: 'none' }} /> 
           )}
         </Form.Item>
         </Spin>

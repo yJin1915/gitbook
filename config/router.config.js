@@ -30,7 +30,7 @@ export default [
     component: '../layouts/BasicLayout',
     routes: [
       // 系统首页
-      { path: '/', redirect: '/customer/management/index' },
+      // { path: '/', redirect: '/customer/management/index' },
       
       {
         path: '/customer/management/index',
@@ -57,7 +57,7 @@ export default [
           },
           {
             path: '/customer/management/index/transfer_details',
-            name: 'columnar_details',
+            name: 'transfer_details',
             component:'./Customerlist/transferList'
           },
         ]

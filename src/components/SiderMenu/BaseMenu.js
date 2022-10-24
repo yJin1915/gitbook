@@ -171,7 +171,7 @@ export default class BaseMenu extends PureComponent {
           defaultSelectedKeys={[current_path]}
           mode="inline"
           theme="dark"
-          inlineCollapsed={collapsed}
+          // inlineCollapsed={collapsed}
         >
         {
           sidebar.map(item => {

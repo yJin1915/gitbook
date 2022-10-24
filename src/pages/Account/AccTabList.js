@@ -127,6 +127,7 @@ export default function AccTabList (props) {
     <div className={styles.table}>
       <Table columns={columns} dataSource={props.usersInfo.userlist}
         scroll={{ x: 992 }}
+        rowKey={(data,index)=>index}
         tableLayout='auto' columnWidth='200px' defaultSortOrder pagination={
           {
             pageSize: usersInfo.pageSize,
