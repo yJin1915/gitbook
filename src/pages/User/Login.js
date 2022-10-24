@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import { formatMessage, FormattedMessage,setLocale ,getLocale } from 'umi/locale';
-import {  Alert, Modal ,Button} from 'antd';
+import {  Alert, Modal ,Button,message} from 'antd';
 import Login from '@/components/Login';
 import UserLogin from '@/components/UserLogin';
 import styles from './Login.less';
