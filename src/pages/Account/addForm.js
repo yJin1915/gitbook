@@ -20,15 +20,32 @@ class HorizontalLoginForm extends React.Component {
         roleId:edit.roleId,
         // password: '',
       })
+      let role = edit.roleId
+    if(role==2){
       this.setState({
-        childrenPercent: edit.chidrenCommissionRate,
-        parentPercent:edit.parentCommissionRate
+        childrenPercent: 20,
+        parentPercent: 0
       })
+    }else if(role==3){
+      this.setState({
+        childrenPercent: 15,
+        parentPercent: 5
+      })
+    }else if(role==4){
+      this.setState({
+        childrenPercent: 10,
+        parentPercent: 10
+      })
+    }
     }
     else {
       if (storage.get('cutuserInfo').roleId == 3) {
         this.props.form.setFieldsValue({
           roleId:4
+        })
+        this.setState({
+          childrenPercent: 10,
+          parentPercent: 10
         })
       }
       
