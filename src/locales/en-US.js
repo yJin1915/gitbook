@@ -7,6 +7,7 @@ export default {
   'navBar.lang': 'Language',
   'Userlogin': 'User login',
   'user': 'Please enter wallet address',
+  "Pleaseuser":'Please enter account number',
   'PleasePassword': 'Enter your password',
   'login': 'Log in',
   'Mainnet':'Network error, please switch to the ethereum mainnet',
@@ -31,7 +32,7 @@ export default {
   'TotalRevenue': 'Total revenue',
   'FCC': 'FCC',
   'FCR': 'FCR',
-  'MATIC': 'MATIC',
+  'ETH': 'ETH',
   'GeneralPartner': 'General Partners',
   'country_partner': 'Country partners',
   'city_partner': 'City partners',
@@ -145,6 +146,10 @@ export default {
   'toAddress':'toAddress',
   'sendValue':'sendValue',
   'createTime':'createTime',
-  "remark":"website address"
+  "remark":"website address",
+  "changePsw":"Change password",
+  "TotalCommission":"Total Commission",
+  "FrozenCommission":"Frozen Commission",
+  "BalanceCommission":"Balance Commission",
 };
 

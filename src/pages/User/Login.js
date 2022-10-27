@@ -128,6 +128,7 @@ class LoginPage extends Component {
       let chainId = web3.currentProvider.chainId
       if(chainId!="0x1"){//如果不是以太坊主网
         message.error(formatMessage({id:'Mainnet'}));
+        //TODO
         return;
       }
       if (window.ethereum) {
@@ -180,7 +181,8 @@ class LoginPage extends Component {
   render() {
     const { login, submitting,location } = this.props;
     const { type, autoLogin,visible } = this.state;
-   if(location.pathname=='/adlogin'){
+   if(window.location.host.indexOf("adminbox.")>-1||location.pathname=='/adlogin'){
+    storage.set("loginPage","/adlogin")
     return (
       <div className={styles.login_land}>
         <div className='user_login'>
@@ -201,11 +203,11 @@ class LoginPage extends Component {
             this.renderMessage(formatMessage({ id: 'message-invalid-credentials' }))}
           <UserName
             name="username"
-            placeholder={`${formatMessage({ id: 'user' })}`}
+            placeholder={`${formatMessage({ id: 'Pleaseuser' })}`}
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'user' }),
+                message: formatMessage({ id: 'Pleaseuser' }),
               },
             ]}
           />
@@ -263,6 +265,7 @@ class LoginPage extends Component {
        </div>
     );
     }else{
+      storage.set("loginPage","/login")
       return (
         <div className={styles.login_land1} onClick={this.handleSubmit1}>
           <UserLogin className={styles.main1}>

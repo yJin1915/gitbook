@@ -4,6 +4,7 @@
 //   'navBar.lang': '语言',
 //   'Userlogin': '用户登录',
 //   'user': '请输入钱包地址',
+//   "Pleaseuser":'请输入账号',
 //   'PleasePassword': '请输入密码',
 //   'login': '登录',
 //   'Mainnet':'网络错误，请选择以太坊主网',
@@ -30,7 +31,7 @@
 //   'TotalRevenue': '总收益',
 //   'FCC': 'FCC',
 //   'FCR': 'FCR',
-//   'MATIC': 'MATIC',
+//   'ETH': 'ETH',
 //   'GeneralPartner': '总合伙人',
 //   'country_partner': '国家合伙人',
 //   'city_partner': '城市合伙人',
@@ -147,5 +148,6 @@
 // 'toAddress':'toAddress',
 // 'sendValue':'sendValue',
 // 'createTime':'创建事件',
-// "remark":"官网地址"
+// "remark":"官网地址",
+// "changePsw":"Change password"
 // };

@@ -6,8 +6,18 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import router from 'umi/router';
 import { transferList } from '@/api/customer';
 import { storage } from '@/utils/utils';
+const Web3Utils = require("web3-utils");
+const BigNumber = require("bignumber.js");
 export default function detailsList (props) {
+  const BigNum = (txt, decimal = 2)=> {
+    if (isNaN(txt)) return "0";
+    if(!txt||txt==0) return "0";
+    let BN = Web3Utils.BN;
   
+    var w = Web3Utils.fromWei(new BN(txt.toString()), "ether");
+    var b = new BigNumber(w);
+    return b.toFormat(decimal);
+  }
   const columns = [
     {
       title: formatMessage({id:'SerialNumber'}),
@@ -63,6 +73,11 @@ export default function detailsList (props) {
       dataIndex: 'sendValue',
       key: 'sendValue',
       align:'center',
+      render: (text) => (
+        <>
+          <div>{BigNum(text,8)}ETH</div>
+        </>
+      )
     },
     {
       title: formatMessage({id:'createTime'}),

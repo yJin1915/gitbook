@@ -5,18 +5,16 @@ export default [
     path: '/login',
     component: '../layouts/UserLayout',
     routes: [
-      { path: '/', redirect: '/login' },
+      // { path: '/', redirect: '/login' },
       { path: '/login', component: './User/login' },
-      // { path: '/user/register', component: './User/Register' },
     ],
   },
   {
     path: '/adlogin',
     component: '../layouts/UserLayout',
     routes: [
-      { path: '/', redirect: '/login' },
+      // { path: '/', redirect: '/login' },
       { path: '/adlogin', component: './User/login' },
-      // { path: '/user/register', component: './User/Register' },
     ],
   },
    // 使用手册

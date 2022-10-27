@@ -37,8 +37,7 @@ class HorizontalLoginForm extends React.Component {
         parentPercent: 10
       })
     }
-    }
-    else {
+    } else {
       if (storage.get('cutuserInfo').roleId == 3) {
         this.props.form.setFieldsValue({
           roleId:4
@@ -305,7 +304,13 @@ class HorizontalLoginForm extends React.Component {
             <Radio.Group onChange={this.handleSubmit} >
             {
               this.props.currentRole.map(item => {
-                return  <Radio key={item.roleId} value={item.roleId} style={{width:'100%'}}>{formatMessage({id:item.roleCode})}</Radio>
+                if(this.props.type=='edit'){
+                  if(item.roleId<=this.props.edit.roleId){
+                    return  <Radio key={item.roleId} value={item.roleId} style={{width:'100%'}}>{formatMessage({id:item.roleCode})}</Radio>
+                  }
+                }else{
+                  return  <Radio key={item.roleId} value={item.roleId} style={{width:'100%'}}>{formatMessage({id:item.roleCode})}</Radio>
+                }
               })
             } </Radio.Group>
           )}
@@ -313,9 +318,9 @@ class HorizontalLoginForm extends React.Component {
         {
           storage.get('cutuserInfo').roleId ==1? <Form.Item  label={formatMessage({ id: 'SuperiorInvitationCode' })}>
           {getFieldDecorator('inviteCode', 
-          // {
-          //   rules: [{ required: true, message: formatMessage({id:'recommenderCode'}) }],
-          // }
+          {
+            rules: [{ required: true, message: formatMessage({id:'recommenderCode'}) }],
+          }
           )(
             <Input
               placeholder="inviteCode"
