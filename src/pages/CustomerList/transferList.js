@@ -13,8 +13,16 @@ export default function detailsList (props) {
     if (isNaN(txt)) return "0";
     if(!txt||txt==0) return "0";
     let BN = Web3Utils.BN;
-  
     var w = Web3Utils.fromWei(new BN(txt.toString()), "ether");
+    var b = new BigNumber(w);
+    return b.toFormat(decimal);
+  }
+  const weiNum = (txt, decimal = 2)=> {
+    if (isNaN(txt)) return "0";
+    if(!txt||txt==0) return "0";
+    let BN = Web3Utils.BN;
+    var v = Web3Utils.toWei(new BN(txt.toString()), "Gwei");
+    var w = Web3Utils.fromWei(v.toString(), "ether");
     var b = new BigNumber(w);
     return b.toFormat(decimal);
   }
@@ -45,6 +53,17 @@ export default function detailsList (props) {
       align:'center',
     },
     {
+      title: 'gasPrice',
+      dataIndex: 'gasPrice',
+      key: 'gasPrice',
+      align:'center',
+      render: (text) => (
+        <>
+          <div>{weiNum(text,8)}ETH</div>
+        </>
+      )
+    },
+    {
       title: formatMessage({id:'contractAddress'}),
       dataIndex: 'contractAddress',
       key: 'contractAddress',
@@ -55,6 +74,9 @@ export default function detailsList (props) {
       dataIndex: 'status',
       key: 'status',
       align:'center',
+      render: (text) => (
+        text==1?'succeed':text==9?'transfer':'fail'
+      )
     },
     {
       title: formatMessage({id:'fromAddress'}),
@@ -78,6 +100,12 @@ export default function detailsList (props) {
           <div>{BigNum(text,8)}ETH</div>
         </>
       )
+    },
+    {
+      title: 'nonce',
+      dataIndex: 'nonce',
+      key: 'nonce',
+      align:'center',
     },
     {
       title: formatMessage({id:'createTime'}),
