@@ -89,7 +89,7 @@ export default function detailsList (props) {
       key: 'userType',
       align: 'center',
       render: (text, record) => (
-        record.userType==0?'普通':record.userType==1?'社区':record.userType==2?'城市':'国家'
+        record.userType==0?formatMessage({id:'OrdinaryUsers'}):record.userType==1?formatMessage({id:'community_partner'}):record.userType==2?formatMessage({id:'city_partner'}):formatMessage({id:'country_partner'})
      )
     },
   ];

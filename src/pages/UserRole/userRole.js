@@ -81,8 +81,8 @@ export default function userRole () {
     },
     {
       title: formatMessage({id:'RoleName'}),
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "roleCode",
+      key: "roleCode",
       render:(text)=>formatMessage({id:text})
     },
     {

@@ -28,13 +28,13 @@ export default class GlobalHeaderRight extends PureComponent {
     }
     const menu = (
       <Menu >
-        <Menu.Item key='1'>
-        <span onClick={()=>goLogin('/current_userInfo/userInfo')}>
+        <Menu.Item key='1' onClick={()=>goLogin('/current_userInfo/userInfo')}>
+        <span >
             {formatMessage({ id: 'PersonalInformation' })}
           </span>
        </Menu.Item>
-     <Menu.Item key='2'>
-     <span onClick={()=> goLogin('/login')}>
+     <Menu.Item key='2' onClick={()=> goLogin('/login')}>
+     <span >
         {formatMessage({ id: 'Exitlogin' })}
      </span>
     </Menu.Item>
@@ -75,7 +75,7 @@ export default class GlobalHeaderRight extends PureComponent {
              <Option value="ko-KR">한국어 공부 해요.</Option>
            </Select>
         </div> */}
-        <Dropdown overlay={menu} >
+        <Dropdown overlay={menu}>
          <div  onClick={e => e.preventDefault()} style={{cursor:'pointer'}}>
          { storage.get('cutuserInfo')?storage.get('cutuserInfo').email:''} <Icon type="down" style={{marginLeft:'10px'}}/>
            </div>
