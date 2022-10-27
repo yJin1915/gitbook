@@ -9,24 +9,24 @@ import { storage } from '@/utils/utils';
 import { OperationalRole } from '@/api/account';
 class Home extends PureComponent {
   state = {
-    profit: {
-      totalFcc:0,
-      totaLFcr: 0,
-      totalMatic: 0,
-      countryPartner: 0,
-      cityPartner: 0,
-      communityPartner: 0,
-      commonUser: 0
-    } //收益
+    // profit: {
+    //   totalFcc:0,
+    //   totaLFcr: 0,
+    //   totalMatic: 0,
+    //   countryPartner: 0,
+    //   cityPartner: 0,
+    //   communityPartner: 0,
+    //   commonUser: 0
+    // } //收益
   }
   componentDidMount () {
-    profitInfo().then(res => {
-      if (res) {
-        this.setState({
-          profit:res.data,
-        })
-      }
-    })
+    // profitInfo().then(res => {
+    //   if (res) {
+    //     this.setState({
+    //       profit:res.data,
+    //     })
+    //   }
+    // })
     OperationalRole().then(res => {
       if (res) {
         // 当前用户可以设置的角色
@@ -36,7 +36,7 @@ class Home extends PureComponent {
   }
 
   render () {
-    const {profit}=this.state
+    // const {profit}=this.state
     return (
       <PageHeaderWrapper>
         {/* 首页内容区域 */}

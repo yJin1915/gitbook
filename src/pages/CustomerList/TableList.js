@@ -6,8 +6,18 @@ import { formatMessage } from 'umi/locale';
 import router from 'umi/router';
 import { storage } from '@/utils/utils';
 import { userRelieve, userTypeInfo } from '@/api/User';
-
+const Web3Utils = require("web3-utils");
+const BigNumber = require("bignumber.js");
 export default function TableList (props) {
+  const BigNum = (txt, decimal = 2)=> {
+    if (isNaN(txt)) return "0";
+    if(!txt||txt==0) return "0";
+    let BN = Web3Utils.BN;
+  
+    var w = Web3Utils.fromWei(new BN(txt.toString()), "ether");
+    var b = new BigNumber(w);
+    return b.toFormat(decimal);
+  }
   const columns = [
     {
       title: formatMessage({id:'SerialNumber'}),
@@ -62,15 +72,35 @@ export default function TableList (props) {
       )
     },
     {
-      title: formatMessage({id:'EarnCommission'}),
-      dataIndex: 'fcc',
-      key:'fcc',
+      title: formatMessage({id:'TotalCommission'}),
+      dataIndex: 'totalCommission',
+      key:'totalCommission',
       align:'center',
       render: (text, record) => (
         <>
-          <div>{text}FCC</div>
-          <div>{record.fcr}FCR</div>
-          <div>{record.matic}MATIC</div>
+          <div>{BigNum(text,8)}ETH</div>
+        </>
+      )
+    },
+    {
+      title: formatMessage({id:'FrozenCommission'}),
+      dataIndex: 'frozenCommission',
+      key:'frozenCommission',
+      align:'center',
+      render: (text, record) => (
+        <>
+          <div>{BigNum(text,8)}ETH</div>
+        </>
+      )
+    },
+    {
+      title: formatMessage({id:'BalanceCommission'}),
+      dataIndex: 'balanceCommission',
+      key:'balanceCommission',
+      align:'center',
+      render: (text, record) => (
+        <>
+          <div>{BigNum(text,8)}ETH</div>
         </>
       )
     },
@@ -117,8 +147,9 @@ export default function TableList (props) {
       pathname: '/customer/management/index/columnar_details',
     })
     // 存储请求需要的客户佣金数据
-    storage.set('CustomerDetails',{ childrenUserId: value.childrenUserId,
-      parentUserId: value.parentUserId})
+    // storage.set('CustomerDetails',{ childrenUserId: value.childrenUserId,
+    //   parentUserId: value.parentUserId})
+      storage.set('CustomerDetails',{ parentUserId: value.childrenUserId})
 
   }
   const onTransfer = (value) => {

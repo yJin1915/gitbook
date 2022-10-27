@@ -8,6 +8,8 @@ import { storage ,RoleListType} from '@/utils/utils';
 import { userDataList } from '@/api/customer';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { profitInfo, User } from '@/api/User';
+const Web3Utils = require("web3-utils");
+const BigNumber = require("bignumber.js");
 // import { TeamOutlined } from '@ant-design/icons';
 
 export default function Account () {
@@ -84,7 +86,6 @@ export default function Account () {
       pageNum: usersInfo.pageNum,
       pageSize:usersInfo.pageSize
     }
-    console.log(params);
     custList(params)
     
   }
@@ -111,11 +112,23 @@ export default function Account () {
     }
   
   }
+ const BigNum = (txt, decimal = 2)=> {
+    if (isNaN(txt)) return "0";
+    if(txt==0) return "0";
+    let BN = Web3Utils.BN;
+  
+    var w = Web3Utils.fromWei(new BN(txt.toString()), "ether");
+    var b = new BigNumber(w);
+    return b.toFormat(decimal);
+  }
   useEffect(() => {
     custList({})  // 获取用户列表
     currentRole() // 
     profitInfo().then(res => {
       if (res) {
+        res.data.totalCommission = BigNum(res.data.totalCommission,8)
+        res.data.frozenCommission = BigNum(res.data.frozenCommission,8)
+        res.data.balanceCommission = BigNum(res.data.balanceCommission,8)
         setprofit(res.data)
       }
     })
@@ -138,20 +151,21 @@ export default function Account () {
              <img  src={require('../../style/img/profit.png')}  alt='' className='profit_logo'/>
             {formatMessage({ id: 'TotalRevenue' })}</div>
             <div className='profit_info'>
-              
-               
-                <div className='fcc'>
-                <span className='number'>{profit.totaLFcr}</span>
-                <span>FCR</span>
-                  </div>
+              <div className='fcc'>
+                <span>{formatMessage({id:'TotalCommission'})}</span>
+                <span className='number'>{profit.totalCommission}</span>
+                <span>ETH</span>
+              </div>
                   
               <div className='fcc'>
-                <span className='number'>{profit.totalFcc}</span>
-                <span>FCC</span>
+              <span>{formatMessage({id:'FrozenCommission'})}</span>
+                <span className='number'>{profit.frozenCommission}</span>
+                <span>ETH</span>
               </div>
               <div className='fcc'>
-                <span className='number'>{profit.totalMatic}</span>
-                <span>MATIC</span>
+              <span>{formatMessage({id:'BalanceCommission'})}</span>
+                <span className='number'>{profit.balanceCommission}</span>
+                <span>ETH</span>
               </div>
              
               </div>

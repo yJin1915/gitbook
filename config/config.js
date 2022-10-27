@@ -6,7 +6,7 @@ import defaultSettings from '../src/defaultSettings';
 import slash from 'slash2';
 // let proxyBase = 'https://intermediate.gamehualing.com'; // 开发接口代理地址
 // let proxyBase = 'http://47.98.211.160/'; // 开发接口代理地址
-let proxyBase = 'http://192.168.50.35:8080/'; // 开发接口代理地址
+let proxyBase = 'http://192.168.53.10/'; // 开发接口代理地址
 
 const plugins = [
   [
@@ -49,14 +49,14 @@ const proxyArr = [
 
 export default {
   // add for transfer to umi
-  history: 'hash',
+  history: 'browser',
   hash: true,
   plugins,
   define: {
     APP_TYPE: process.env.APP_TYPE || '',
     BUILD_TYPE: process.env.BUILD_TYPE || '',
   },
-  publicPath: process.env.BUILD_TYPE === 'pro' ? './' : './',
+  publicPath: process.env.BUILD_TYPE === 'pro' ? '/' : './',
   // publicPath: process.env.BUILD_TYPE === 'pro' ? 'https://admin.gamehualing.com/' : './',
   targets: {
     ie: 11,

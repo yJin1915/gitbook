@@ -2,7 +2,7 @@ import React from 'react';
 import { Card ,Button, Form, Input,InputNumber, message} from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { formatMessage, FormattedMessage } from 'umi/locale';
-import styles from './commission.less'
+import styles from './Commission.less'
 import { GetCommission,SetCommission } from '@/api/Commission';
 import Secret from "@/utils/secret";
 

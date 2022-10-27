@@ -72,10 +72,11 @@ export default function request( fmtUrl, option) {
 
   const newOptions = { ...defaultOptions, ...options };
   let FcToken = storage.get("FcToken")?storage.get("FcToken"):null;
-  let path=window.location.hash.slice(1)
+  let path=window.location.pathname;
   if(path !=='/adlogin' & ! FcToken){
     if(path !=='/login'){
-      return router.push('/login')
+      let page = storage.get("loginPage")||"/login"
+      return router.push(page)
     }
   }
   if (FcToken) {

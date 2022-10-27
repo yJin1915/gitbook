@@ -24,8 +24,17 @@ import { paramsPath } from '@/utils/utils'
     params
   })
  }
-
-
+/**
+ * 修改密码
+ * @param {*} params  
+ * @returns 
+ */
+ export const ChangePassword = (data) => {
+  return   request('/admin/user/changePassword',{
+    method: 'post',
+    body:JSON.stringify({...data})
+  })
+ }
  /**
   * 查询角色列表
   * @returns 
