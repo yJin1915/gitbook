@@ -32,18 +32,6 @@ export default function TableList (props) {
       dataIndex: "childrenAddress",
       key: "childrenAddress",
       align: 'center',
-      ellipsis: true,
-      onCell: () => {
-        return {
-          style: {
-            maxWidth: 160,
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            textOverflow:'ellipsis',
-            cursor:'pointer'
-          }
-        }
-      },
       render: (text) => (
         text?text:'/'
       )
@@ -70,18 +58,6 @@ export default function TableList (props) {
       dataIndex: "parentAddress",
       key: "parentAddress",
       align:'center',
-      ellipsis: true,
-      onCell: () => {
-        return {
-          style: {
-            maxWidth: 160,
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            textOverflow:'ellipsis',
-            cursor:'pointer'
-          }
-        }
-      },
       render: (text) => (
          text==''|| text==null ? '/':text
       )

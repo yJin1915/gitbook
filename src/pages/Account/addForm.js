@@ -361,7 +361,7 @@ class HorizontalLoginForm extends React.Component {
         >
           <div style={{ margin: '15px' }}>
             {formatMessage({ id: 'addedbecome' })}
-            {` `}{this.state.addAndOpen.walletAddress}{` `}
+            {/* {` `}{this.state.addAndOpen.walletAddress}{` `} */}
             {this.state.addAndOpen.roleId == 2 ? formatMessage({ id: 'country_partner' }) : this.state.addAndOpen.roleId == 3 ? formatMessage({ id: 'city_partner' }) : this.state.addAndOpen.roleId == 4 ? formatMessage({ id: 'community_partner' }) : ''}
             {formatMessage({ id: 'sureToAdd' })}</div>
 
