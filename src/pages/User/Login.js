@@ -125,12 +125,12 @@ class LoginPage extends Component {
     .request({ method: "eth_requestAccounts" })
     .then((accounts) => {
 
-      let chainId = web3.currentProvider.chainId
-      if(chainId!="0x1"){//如果不是以太坊主网
-        message.error(formatMessage({id:'Mainnet'}));
-        //TODO
-        return;
-      }
+      // let chainId = web3.currentProvider.chainId
+      // if(chainId!="0x1"){//如果不是以太坊主网
+      //   message.error(formatMessage({id:'Mainnet'}));
+      //   //TODO
+      //   return;
+      // }
       if (window.ethereum) {
         let web3 = new Web3EthPersonal(window.ethereum);
         let FreeCity = "123456";

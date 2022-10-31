@@ -7,18 +7,44 @@
     }
   }
 }
-.formItem{
+
+.formItem {
   :global {
-    .ant-input-number{
+    .ant-input-number {
       display: block;
       width: 500px;
     }
+
     .ant-input {
       display: block;
       width: 500px;
     }
   }
 }
-.hide{
+
+.hide {
   display: none;
+}
+
+.formItemFlex {
+  :global {
+    .ant-input-number {
+      display: block;
+      width: 500px;
+    }
+
+    .ant-input {
+      display: block;
+      width: 500px;
+    }
+
+    .ant-form-item-children {
+      display: flex;
+      align-items: center;
+    }
+
+    .ant-form-text {
+      margin-left: 10px;
+    }
+  }
 }
