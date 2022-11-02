@@ -76,9 +76,9 @@ class UserLogin extends Component {
     return (
       <LoginContext.Provider value={this.getContext()}>
         <div className={classNames(className, styles.login)}>
-        <FormattedMessage id="login" />
+        <FormattedMessage id="Connectpurse" />
         </div>
-        <div className={classNames(className, styles.loginTip)}>Click to login and connect to wallet</div>
+        {/* <div className={classNames(className, styles.loginTip)}>Click to login and connect to wallet</div> */}
       </LoginContext.Provider>
     );
   }

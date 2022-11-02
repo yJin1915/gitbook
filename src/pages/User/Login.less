@@ -3,17 +3,19 @@
 .main {
   width: 368px;
   margin: 0 auto;
+
   @media screen and (max-width: @screen-sm) {
     width: 65%;
   }
+
   :global {
-    .forgot{
+    .forgot {
       // font-size: 30px;
-     text-align: right;
-     cursor: pointer;
-     color: #333333;
+      text-align: right;
+      cursor: pointer;
+      color: #333333;
     }
- 
+
   }
 
   .icon {
@@ -40,54 +42,68 @@
   }
 }
 
-.login_land{
+.login_land {
   position: absolute;
-  top: 50%;
-   left: 50%;
-   transform: translate(-50%,-50%);
+  top: 62%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 550px;
   background-color: #FFF;
   border-radius: 8px;
-  margin:  auto;
+  margin: auto;
   padding: 50px 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  :global{
-    .user_login{
+
+  :global {
+    .user_login {
       font-size: @font-size-base;
-       font-size: 25px;
-       font-weight: 600;
-       color: @heading-color;
-        margin-bottom: 30px;
+      font-size: 25px;
+      font-weight: 600;
+      color: @heading-color;
+      margin-bottom: 28px;
     }
   }
 }
-.login_land1{
+
+.login_land1 {
   position: absolute;
-  top: 50%;
+  top: 66.5%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  width: 400px;
+  transform: translateX(-50%);
+  width: 307px;
+  height: 88px;
+  line-height: 80px;
+  background: url('../../style/img/btn.png') no-repeat;
+  background-size: 100% 100%;
+  font-size: 32px;
+  color: #7DA6E6;
+  text-align: center;
   @media screen and (max-width: @screen-sm) {
     width: 65%;
   }
-  padding: 50px 0;
-  background-color: #FFF;
-  border-radius: 8px;
-  margin:  auto;
+  margin: auto;
   cursor: pointer;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: linear-gradient(270deg, #95F9FF 0%, #F9B3FF 100%);
-  box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.2), -4px -4px 2px 0px rgba(255,255,255,0.2);
-  border-radius: 31px;
-  &:hover{
-    box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.42), -4px -4px 2px 0px rgba(255,255,255,0.5);
+
+  &:hover {
+    background: url('../../style/img/select.png') no-repeat;
+    background-size: 100% 100%;
+    color: #0C1425;
   }
+}
+
+.login_text{
+  position: absolute;
+  top: 34.9%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 629px;
+  height:153px;
+  background: url('../../style/img/title-en.png') no-repeat;
+  background-size: 100% 100%;
 }
 .main1 {
   // width: 368px;

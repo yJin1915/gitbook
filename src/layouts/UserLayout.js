@@ -56,7 +56,7 @@ class UserLayout extends React.PureComponent {
           
           <div className={styles.freeCity_logo}>
             <img src={require('../style/img/freecity_logo.png')} alt='free city' />
-             <span className='fc_agent'>{formatMessage({id:'FreecityAgent'})}</span>
+             {/* <span className='fc_agent'>{formatMessage({id:'FreecityAgent'})}</span> */}
           </div>
           {isIE() ? <h1 style={{ textAlign: 'center' }}>请使用谷歌浏览器访问</h1> : children}
         </div>

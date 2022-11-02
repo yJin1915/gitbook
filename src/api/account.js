@@ -8,7 +8,7 @@ import { paramsPath } from '@/utils/utils'
  * @returns 
  */
 export const UserList = (params) => {
-  return   request('/admin/user/list',{
+  return request('/admin/user/list', {
     method: 'get',
     params
   })
@@ -17,24 +17,24 @@ export const UserList = (params) => {
 export const SubmitUserList = (params) => {
   return request(`/admin/user/list${paramsPath(params)}`)
 }
-  // /admin/user/partner/{userId}
-  /**
-   * 查询账户「
-   * @param {*} params 
-   * @returns 
-   */
-  export const SubmitPartner= (id) => {
-    return request(`/admin/user/partner/${id}`)
-  }
+// /admin/user/partner/{userId}
+/**
+ * 查询账户「
+ * @param {*} params 
+ * @returns 
+ */
+export const SubmitPartner = (id) => {
+  return request(`/admin/user/partner/${id}`)
+}
 /**
  * 启用/禁用用户
  * @param {*} data 
  * @returns 
  */
 export const UserenbOrDis = (data) => {
-  return   request(`/admin/user/enableOrDisable`,{
+  return request(`/admin/user/enableOrDisable`, {
     method: 'post',
-    body:JSON.stringify({...data})
+    body: JSON.stringify({ ...data })
   })
 }
 
@@ -44,7 +44,7 @@ export const UserenbOrDis = (data) => {
  * @returns 
  */
 export const OperationalRole = () => {
-  return   request(`/partner/relation/roles`,{
+  return request(`/partner/relation/roles`, {
     method: 'get',
   })
 }
@@ -55,16 +55,16 @@ export const OperationalRole = () => {
  * @returns 
  */
 export const GetScale = (data) => {
-  return   request(`/partner/relation/percent${paramsPath(data)}`,{
+  return request(`/partner/relation/percent${paramsPath(data)}`, {
     method: 'get',
   })
 }
 
 // 添加账户
 export const userAdd = (data) => {
-  return   request(`/admin/user/add`,{
+  return request(`/admin/user/add`, {
     method: 'post',
-    body:JSON.stringify({...data})
+    body: JSON.stringify({ ...data })
   })
 }
 
@@ -72,9 +72,9 @@ export const userAdd = (data) => {
 
 // 更改信息
 export const userUpData = (data) => {
-  return   request(`/admin/user/update`,{
+  return request(`/admin/user/update`, {
     method: 'put',
-    body:JSON.stringify({...data})
+    body: JSON.stringify({ ...data })
 
   })
 }
@@ -86,7 +86,15 @@ export const userUpData = (data) => {
  * @param {*} data {cdeo:}
  */
 export const setEmail = (data) => {
-  return   request(`/admin/user/email/${data}`,{
+  return request(`/admin/user/email/${data}`, {
   })
 }
 
+// /admin/user/getInviteCode/{walletAddress}
+
+// 获取上级邀请码
+export const getInviteCode = (data) => {
+  return request(`/admin/user/getInviteCode/${data}`, {
+    method: 'get'
+  })
+}

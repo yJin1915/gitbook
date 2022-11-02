@@ -1,4 +1,4 @@
-import { GetScale, OperationalRole, setEmail, userAdd, userUpData } from '@/api/account';
+import { GetScale, OperationalRole, setEmail, userAdd, userUpData, getInviteCode } from '@/api/account';
 import { debounce, storage } from '@/utils/utils';
 import { Form, Spin, Input, Button, Radio, Icon, Modal, message } from 'antd';
 import { formatMessage } from 'umi/locale';
@@ -182,6 +182,20 @@ class HorizontalLoginForm extends React.Component {
       }
     })
   }
+
+  // 自动获取上级邀请码
+  getCode = () => {
+    let params = this.props.form.getFieldsValue().walletAddress
+    if (params) {
+      getInviteCode(params).then(res => {
+        if (res.code == 200) {
+          this.props.form.setFieldsValue({
+            inviteCode: res.data.partnerInviteCode
+          })
+        }
+      })
+    }
+  }
   // 添加提示
   hideModal = () => {
     this.setState({
@@ -273,6 +287,7 @@ class HorizontalLoginForm extends React.Component {
             <Input
               placeholder="Address"
               disabled={this.props.type == 'edit'}
+              onBlur={this.getCode}
             />,
           )}
         </Form.Item>

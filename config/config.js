@@ -6,7 +6,7 @@ import defaultSettings from '../src/defaultSettings';
 import slash from 'slash2';
 // let proxyBase = 'https://intermediate.gamehualing.com'; // 开发接口代理地址
 // let proxyBase = 'http://47.98.211.160/'; // 开发接口代理地址
-let proxyBase = 'http://192.168.53.10/'; // 开发接口代理地址
+let proxyBase = 'http://192.168.53.10'; // 开发接口代理地址
 
 const plugins = [
   [
@@ -14,6 +14,7 @@ const plugins = [
     {
       antd: true,
       dva: {
+        
         hmr: true,
       },
       locale: {

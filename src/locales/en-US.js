@@ -151,5 +151,6 @@ export default {
   "TotalCommission":"Total Commission",
   "FrozenCommission":"Frozen Commission",
   "BalanceCommission":"Balance Commission",
+  "Connectpurse":"Connect purse",
 };
 

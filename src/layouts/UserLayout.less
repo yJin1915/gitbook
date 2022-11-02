@@ -14,6 +14,7 @@
   width: 100%;
   height: 40px;
   line-height: 44px;
+
   :global(.ant-dropdown-trigger) {
     margin-right: 24px;
   }
@@ -24,65 +25,79 @@
   flex: 1;
   position: relative;
   display: flex;
- 
-}
-.freeCity_logo{
-   position: absolute;
-   top: 10px;
-   left: 50px;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   :global{
-    .fc_agent{
-      margin-top: 10px;
-      color: #FFF;
-     }
-   }
-  
 
 }
-.loginHeader{
+
+.freeCity_logo {
+  width: 214px;
+  height: 78px;
+  position: absolute;
+  top: 21.1%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  :global {
+    .fc_agent {
+      margin-top: 10px;
+      color: #FFF;
+    }
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+
+}
+
+.loginHeader {
   display: flex;
   position: absolute;
   top: 0;
   right: 0;
   margin-top: 20px;
   margin-right: 20px;
-  :global{
-    .language{
+
+  :global {
+    .language {
       font-size: @font-size-base;
       color: @heading-color;
       margin-left: 20px;
-      .lang{
+
+      .lang {
         margin-right: 20px;
         color: #FFF;
       }
     }
-    .user_manual{
+
+    .user_manual {
       width: 120px;
       height: 35px;
-     position: relative;
-     border: solid 2px transparent;
-    border-radius: 10px;
-    background-image: linear-gradient(#1c3455, #193151),
+      position: relative;
+      border: solid 2px transparent;
+      border-radius: 10px;
+      background-image: linear-gradient(#1c3455, #193151),
         linear-gradient(to right, #e1aeff, #8dffff);
-    background-origin: border-box;
+      background-origin: border-box;
 
-    background-clip: content-box, border-box;
-     clip-path: inset(0 round 10px);
-     color: #FFF;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     cursor: pointer;
-      .manual_logo{
+      background-clip: content-box, border-box;
+      clip-path: inset(0 round 10px);
+      color: #FFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      .manual_logo {
         width: 16px;
         height: 16px;
         margin-right: 5px;
       }
     }
-    
+
   }
 }
 
@@ -117,4 +132,3 @@
   margin-top: 12px;
   margin-bottom: 40px;
 }
-

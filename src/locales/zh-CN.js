@@ -149,5 +149,6 @@
 // 'sendValue':'sendValue',
 // 'createTime':'创建事件',
 // "remark":"官网地址",
-// "changePsw":"Change password"
+// "changePsw":"Change password",
+//"Connectpurse":"连接钱包",
 // };
