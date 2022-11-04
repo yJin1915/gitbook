@@ -151,4 +151,7 @@
 // "remark":"官网地址",
 // "changePsw":"Change password",
 //"Connectpurse":"连接钱包",
+//"userMode":"用户类型",
+//"normalMode":"正常模式",
+//"TaiwanModel":"台湾模式",
 // };

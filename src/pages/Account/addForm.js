@@ -18,6 +18,7 @@ class HorizontalLoginForm extends React.Component {
         walletAddress: edit.walletAddress,
         inviteCode: edit.inviteCode,
         roleId: edit.roleId,
+        userMode: edit.userMode,
         // password: '',
       })
       let role = edit.roleId
@@ -38,6 +39,9 @@ class HorizontalLoginForm extends React.Component {
         })
       }
     } else {
+      this.props.form.setFieldsValue({
+        userMode: '0'
+      })
       if (storage.get('cutuserInfo').roleId == 3) {
         this.props.form.setFieldsValue({
           roleId: 4
@@ -125,62 +129,102 @@ class HorizontalLoginForm extends React.Component {
     // }
 
   };
+
   // 提交表单
   submit = () => {
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        if (!this.state.childrenPercent) return message.error(formatMessage({ id: 'CommissionProportionFirst' }))
-        const params = {
-          walletAddress: values.walletAddress,
-          // password: values.password,
-          roleId: values.roleId,
-          inviteCode: values.inviteCode,
-          parentPercent: this.state.parentPercent,
-          childrenPercent: this.state.childrenPercent,
-        }
-        if (this.props.type == 'add') {
-          if (!this.state.visible) {
-            // setEmail(values.inviteCode).then(res => {
-            //   if (res?.data) {
-            //     this.setState({
-            //       addAndOpen: {
-            //         email: res.data,
-            //         roleId:values.roleId,
-            //       },
-            //       visible: true,
-            //      });
-            //   }
-            // })
-            this.setState({
-              addAndOpen: {
-                walletAddress: values.walletAddress,
-                roleId: values.roleId,
-              },
-              visible: true,
-            });
+    if (this.props.form.getFieldsValue().userMode == 0) {
+      this.props.form.validateFields((err, values) => {
+        if (!err) {
+          if (!this.state.childrenPercent) return message.error(formatMessage({ id: 'CommissionProportionFirst' }))
+          const params = {
+            walletAddress: values.walletAddress,
+            // password: values.password,
+            roleId: values.roleId,
+            inviteCode: values.inviteCode,
+            parentPercent: this.state.parentPercent,
+            childrenPercent: this.state.childrenPercent,
+            userMode: values.userMode,
+          }
+          if (this.props.type == 'add') {
+            if (!this.state.visible) {
+              // setEmail(values.inviteCode).then(res => {
+              //   if (res?.data) {
+              //     this.setState({
+              //       addAndOpen: {
+              //         email: res.data,
+              //         roleId:values.roleId,
+              //       },
+              //       visible: true,
+              //      });
+              //   }
+              // })
+              this.setState({
+                addAndOpen: {
+                  walletAddress: values.walletAddress,
+                  roleId: values.roleId,
+                  userMode: values.userMode,
+                },
+                visible: true,
+              });
+
+            } else {
+              userAdd(params).then(res => {
+                if (res?.success) {
+                  message.success(formatMessage({ id: 'AddedSuccessfully' }))
+                  this.props.useInfoList({})
+                  this.props.onClose()
+                }
+              })
+            }
 
           } else {
-            userAdd(params).then(res => {
+            userUpData({ ...params, userId: this.props.edit.userId }).then(res => {
               if (res?.success) {
-                message.success(formatMessage({ id: 'AddedSuccessfully' }))
+                message.success(formatMessage({ id: 'ModifiedSuccessfully' }))
                 this.props.useInfoList({})
                 this.props.onClose()
               }
             })
           }
 
+        }
+      })
+    } else {
+      if (!this.props.form.getFieldsValue().walletAddress) return message.error(formatMessage({ id: 'yourEmail' }))
+      const params = {
+        walletAddress: this.props.form.getFieldsValue().walletAddress,
+        userMode: this.props.form.getFieldsValue().userMode,
+      }
+      if (this.props.type == 'add') {
+        if (!this.state.visible) {
+          this.setState({
+            addAndOpen: {
+              walletAddress: this.props.form.getFieldsValue().walletAddress,
+              userMode: this.props.form.getFieldsValue().userMode,
+            },
+            visible: true,
+          });
+
         } else {
-          userUpData({ ...params, userId: this.props.edit.userId }).then(res => {
+          userAdd(params).then(res => {
             if (res?.success) {
-              message.success(formatMessage({ id: 'ModifiedSuccessfully' }))
+              message.success(formatMessage({ id: 'AddedSuccessfully' }))
               this.props.useInfoList({})
               this.props.onClose()
             }
           })
         }
 
+      } else {
+        userUpData({ ...params, userId: this.props.edit.userId }).then(res => {
+          if (res?.success) {
+            message.success(formatMessage({ id: 'ModifiedSuccessfully' }))
+            this.props.useInfoList({})
+            this.props.onClose()
+          }
+        })
       }
-    })
+    }
   }
 
   // 自动获取上级邀请码
@@ -312,7 +356,16 @@ class HorizontalLoginForm extends React.Component {
           )}
         </Form.Item>
        } */}
-        <Form.Item label={formatMessage({ id: 'Role' })}>
+        <Form.Item label={formatMessage({ id: 'userMode' })}>
+          {getFieldDecorator('userMode')(
+            <Radio.Group >
+              <Radio value='0' style={{ width: '100%' }}>{formatMessage({ id: 'normalMode' })}
+              </Radio>
+              <Radio value='1' style={{ width: '100%' }}>{formatMessage({ id: 'TaiwanModel' })}</Radio>
+            </Radio.Group>
+          )}
+        </Form.Item>
+        {this.props.form.getFieldsValue().userMode == 0 ? <Form.Item label={formatMessage({ id: 'Role' })}>
           {getFieldDecorator('roleId', {
             rules: [{ required: true, message: formatMessage({ id: 'PleRole' }) }],
           })(
@@ -329,33 +382,37 @@ class HorizontalLoginForm extends React.Component {
                 })
               } </Radio.Group>
           )}
-        </Form.Item>
+        </Form.Item> : ''}
+
         {
           //  storage.get('cutuserInfo').roleId ==1? 
-          <Form.Item label={formatMessage({ id: 'SuperiorInvitationCode' })}>
-            {getFieldDecorator('inviteCode',
-              {
-                rules: [{ required: true, message: formatMessage({ id: 'recommenderCode' }) }],
-              }
-            )(
-              <Input
-                placeholder="inviteCode"
-                disabled={this.props.edit.inviteCode && this.props.type == 'edit' ? true : false}
-              // onChange={()=>this.onChangInCode(this.onFocusCode,2000)}
-              />,
-            )}
-          </Form.Item>
-          // :''
+          this.props.form.getFieldsValue().userMode == 0 ?
+            <Form.Item label={formatMessage({ id: 'SuperiorInvitationCode' })}>
+              {getFieldDecorator('inviteCode',
+                {
+                  rules: [{ required: true, message: formatMessage({ id: 'recommenderCode' }) }],
+                }
+              )(
+                <Input
+                  placeholder="inviteCode"
+                  disabled={this.props.edit.inviteCode && this.props.type == 'edit' ? true : false}
+                // onChange={()=>this.onChangInCode(this.onFocusCode,2000)}
+                />,
+              )}
+            </Form.Item>
+            : ''
         }
-        <Spin size='small' indicator={<Icon type='loadingOutlined' />} spinning={this.state.loading}>
-          <Form.Item label={formatMessage({ id: 'comRate' })} >
-            {getFieldDecorator('parentPercent', {
-              rules: [{ required: false, message: formatMessage({ id: 'PleaseEnter' }) }],
-            })(
-              <TextArea placeholder={`${childrenPercent ? childrenPercent : 0}`} disabled style={{ resize: 'none' }} />
-            )}
-          </Form.Item>
-        </Spin>
+        {this.props.form.getFieldsValue().userMode == 0 ?
+          <Spin size='small' indicator={<Icon type='loadingOutlined' />} spinning={this.state.loading}>
+            <Form.Item label={formatMessage({ id: 'comRate' })} >
+              {getFieldDecorator('parentPercent', {
+                rules: [{ required: false, message: formatMessage({ id: 'PleaseEnter' }) }],
+              })(
+                <TextArea placeholder={`${childrenPercent ? childrenPercent : 0}`} disabled style={{ resize: 'none' }} />
+              )}
+            </Form.Item>
+          </Spin> : ''}
+
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button onClick={this.submit}
             type="primary"

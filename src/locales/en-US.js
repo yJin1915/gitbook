@@ -152,5 +152,9 @@ export default {
   "FrozenCommission":"Frozen Commission",
   "BalanceCommission":"Balance Commission",
   "Connectpurse":"Connect purse",
+  "userMode":"userMode",
+  "normalMode":"normal mode",
+  "TaiwanModel":"Taiwan model",
+  "TaiWan":"TaiWan",
 };
 

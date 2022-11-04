@@ -1,10 +1,10 @@
 import moment from 'moment';
 
-export function fixedZero(val) {
+export function fixedZero (val) {
   return val * 1 < 10 ? `0${val}` : val;
 }
 
-export function isUrl(path) {
+export function isUrl (path) {
   const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
   return reg.test(path);
 }
@@ -46,7 +46,7 @@ export const isJsonString = str => {
  * @param obj
  * @returns {boolean}
  */
-export const isEmptyObject = function(obj) {
+export const isEmptyObject = function (obj) {
   for (const key in obj) {
     return false;
   }
@@ -73,7 +73,7 @@ export const lastNDay = (dayNum = 0, isMoment = false) => {
  */
 export const debounce = (fn) => {
   var timer;
-  return function() {
+  return function () {
     var _this = this;
     var args = arguments;
     timer && clearTimeout(timer);
@@ -86,7 +86,7 @@ export const debounce = (fn) => {
 /**
  * 深复制
  */
-export function deepClone(obj) {
+export function deepClone (obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
@@ -100,7 +100,7 @@ export const getLastRouteName = url => {
 };
 
 /**获取hash 路由url中的参数**/
-export function getQueryString(name) {
+export function getQueryString (name) {
   var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
   var t = window.location.hash.split('?');
   var r = t[1] ? t[1].match(reg) : null;
@@ -115,7 +115,7 @@ export function getQueryString(name) {
  * 是否为数组
  * @param {any} val
  */
-export function isArray(val) {
+export function isArray (val) {
   return Object.prototype.toString.call(val) === '[object Array]';
 }
 
@@ -123,7 +123,7 @@ export function isArray(val) {
  * 是否为字符串
  * @param {any} val
  */
-export function isString(val) {
+export function isString (val) {
   return Object.prototype.toString.call(val) === '[object String]';
 }
 
@@ -131,7 +131,7 @@ export function isString(val) {
  * 是否为函数
  * @param {any} val
  */
-export function isFunction(val) {
+export function isFunction (val) {
   return Object.prototype.toString.call(val) === '[object Function]';
 }
 
@@ -139,7 +139,7 @@ export function isFunction(val) {
  * 是否为对象
  * @param {any} val
  */
-export function isObject(obj) {
+export function isObject (obj) {
   return Object.prototype.toString.call(obj) === '[object Object]';
 }
 
@@ -156,57 +156,58 @@ export const findIndexWithAttr = (array, attr, value) => {
 };
 
 //封装操作localStorage本地储存的方法
- 
-export const  storage = {
- 
-  set(key, value){
-      localStorage.setItem(key,JSON.stringify(value));
+
+export const storage = {
+
+  set (key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
   },
-  get(key){
-      return JSON.parse(localStorage.getItem(key));
+  get (key) {
+    return JSON.parse(localStorage.getItem(key));
   },
-  remove(key){
-      localStorage.removeItem(key);
+  remove (key) {
+    localStorage.removeItem(key);
   }
-  
+
 }
-    /**
-             *  js中字符串超长作固定长度加省略号（...）处理
-             * @param str 需要进行处理的字符串，可含汉字
-             * @param len 需要显示多少个汉字，两个英文字母相当于一个汉字
-             * @returns {string}
-             */
- export  const beautySub  =(str, len)=> {
-      var reg = /[\u4e00-\u9fa5]/g,    //专业匹配中文
-          slice = str.substring(0, len),
-          chineseCharNum = (~~(slice.match(reg) && slice.match(reg).length)),
-          realen = slice.length * 2 - chineseCharNum;
-      return str.substr(0, realen) + (realen < str.length ? "..." : "");
-  }
+/**
+         *  js中字符串超长作固定长度加省略号（...）处理
+         * @param str 需要进行处理的字符串，可含汉字
+         * @param len 需要显示多少个汉字，两个英文字母相当于一个汉字
+         * @returns {string}
+         */
+export const beautySub = (str, len) => {
+  var reg = /[\u4e00-\u9fa5]/g,    //专业匹配中文
+    slice = str.substring(0, len),
+    chineseCharNum = (~~(slice.match(reg) && slice.match(reg).length)),
+    realen = slice.length * 2 - chineseCharNum;
+  return str.substr(0, realen) + (realen < str.length ? "..." : "");
+}
 
 
- export const  paramsPath=(obj)=> {
-    let result = '';
-    let item;
-   for (item in obj) {
-     if (obj[item] || obj[item] === 0 ) {
-        result += `&${item}=${obj[item]}`;
-      }
+export const paramsPath = (obj) => {
+  let result = '';
+  let item;
+  for (item in obj) {
+    if (obj[item] || obj[item] === 0) {
+      result += `&${item}=${obj[item]}`;
     }
-    if (result) {
-      result ='?'+ result.slice(1);
-    }
-    return result;
   }
-  
+  if (result) {
+    result = '?' + result.slice(1);
+  }
+  return result;
+}
+
 //  筛选客户角色权限列表
 export const RoleListType = (type) => {
   const user = [
     { roleId: 2, roleCode: "country_partner", name: "国家合伙人", roleId2: 3 },
     { roleId: 3, roleCode: "city_partner", name: "城市合伙人", roleId2: 2 },
-    {roleId: 4, roleCode: "community_partner", name: "社区合伙人",roleId2: 1 }
+    { roleId: 4, roleCode: "community_partner", name: "社区合伙人", roleId2: 1 },
+    { roleId: 5, roleCode: "TaiWan", name: "台湾合伙人", roleId2: 5 }
   ]
   return type.map(item => {
-     return  user.find(item1 => item1.roleCode == item.roleCode)
+    return user.find(item1 => item1.roleCode == item.roleCode)
   })
 }
